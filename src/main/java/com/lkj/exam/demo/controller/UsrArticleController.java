@@ -35,8 +35,6 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public List<Article> getArticles() {
-		List<Article> articles = new ArrayList<>();
-		
 		return articles;
 	}
 }
