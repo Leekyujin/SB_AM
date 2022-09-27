@@ -1,6 +1,5 @@
 package com.lkj.exam.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public List<Article> getArticles() {
-		return articleService.articles();
+		return articleService.getArticles();
 	}
 	
 	@RequestMapping("/usr/article/doDelete")
