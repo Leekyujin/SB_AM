@@ -38,6 +38,4 @@ public class ArticleService {
 		articleRepository.modifyArticle(id, title, body);
 	}
 		
-	
-	
 }
