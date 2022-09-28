@@ -19,7 +19,7 @@ public class UsrMemberController {
 			String nickname, String cellphoneNum, String email) {
 		
 		memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
-		return "가입!";
+		return name + "님 회원가입 되었습니다.";
 	}
 
 }
