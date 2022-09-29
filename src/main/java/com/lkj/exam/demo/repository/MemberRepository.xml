@@ -14,4 +14,14 @@
 		email = #{email}
 	</insert>
 	
+	<select id="getMemberById" resultType="Member">
+		SELECT * 
+		FROM `member` AS M 
+		WHERE M.id = #{id}
+	</select>
+	
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+	
 </mapper>
