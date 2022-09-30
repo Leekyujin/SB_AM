@@ -29,7 +29,7 @@ public class UsrArticleController {
 			return ResultData.from("F-3", "내용을 입력해주세요.");
 		}
 		
-		ResultData writeArticleRd = articleService.writeArticle(title, body);
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body);
 		
 		int id = (int) writeArticleRd.getData1();
 		
@@ -48,32 +48,32 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData doDelete(int id) {
+	public Object doDelete(int id) {
 		Article article = articleService.getArticle(id);
 		
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			return id + "번 게시물은 존재하지 않습니다.";
 		}
 		
 		articleService.deleteArticle(id);
 		
-		return ResultData.from("S-3", Ut.f("%d번 게시물을 삭제했습니다.", id));
+		return id + "번 게시물을 삭제했습니다.";
 	}
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData doModify(int id, String title, String body) {
+	public Object doModify(int id, String title, String body) {
 		Article article = articleService.getArticle(id);
 		
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
+			return id + "번 게시물은 존재하지 않습니다.";
 		}
 		
 		articleService.modifyArticle(id, title, body);
 		
 		article = articleService.getArticle(id);
 		
-		return ResultData.from("S-4", Ut.f("%d번 게시물이 수정되었습니다.", id), article);
+		return article;
 	}
 	
 	@RequestMapping("/usr/article/getArticle")
