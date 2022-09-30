@@ -1,5 +1,7 @@
 package com.lkj.exam.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +23,10 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData doAdd(String title, String body) {
 		if (Ut.empty(title)) {
-			return ResultData.from("F-1", "제목을 입력해주세요.");
+			return ResultData.from("F-2", "제목을 입력해주세요.");
 		}
 		if (Ut.empty(body)) {
-			return ResultData.from("F-2", "내용을 입력해주세요.");
+			return ResultData.from("F-3", "내용을 입력해주세요.");
 		}
 		
 		ResultData writeArticleRd = articleService.writeArticle(title, body);
@@ -39,7 +41,9 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public ResultData getArticles() {
-		return ResultData.from("S-1", Ut.f("게시물 리스트입니다."), articleService.getArticles());
+		List<Article> articles = articleService.getArticles();
+		
+		return ResultData.from("S-2", "Article List", articles);
 	}
 	
 	@RequestMapping("/usr/article/doDelete")
@@ -53,7 +57,7 @@ public class UsrArticleController {
 		
 		articleService.deleteArticle(id);
 		
-		return ResultData.from("S-1", Ut.f("%d번 게시물을 삭제했습니다.", id));
+		return ResultData.from("S-3", Ut.f("%d번 게시물을 삭제했습니다.", id));
 	}
 	
 	@RequestMapping("/usr/article/doModify")
@@ -69,7 +73,7 @@ public class UsrArticleController {
 		
 		article = articleService.getArticle(id);
 		
-		return ResultData.from("S-1", Ut.f("%d번 게시물이 수정되었습니다.", id), article);
+		return ResultData.from("S-4", Ut.f("%d번 게시물이 수정되었습니다.", id), article);
 	}
 	
 	@RequestMapping("/usr/article/getArticle")
