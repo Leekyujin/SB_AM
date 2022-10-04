@@ -43,7 +43,7 @@ public class MemberService {
 		return memberRepository.getMemberByNameAndEmail(name, email);
 	}
 
-	private Member getMemberByLoginId(String loginId) {
+	public Member getMemberByLoginId(String loginId) {
 		return memberRepository.getMemberByLoginId(loginId);
 	}
 
@@ -51,18 +51,4 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
-	public ResultData login(String loginId, String loginPw) {
-		Member existsMember = getMemberByLoginId(loginId);
-		
-		if (existsMember == null) {
-			return ResultData.from("F-3", Ut.f("%s은(는) 존재하지 않는 아이디입니다.", loginId));
-		}
-		
-		if (existsMember.getLoginPw().equals(loginPw) == false) {
-			return ResultData.from("F-4", "비밀번호를 확인해주세요.");
-		}
-		
-		return ResultData.from("S-1", "%s님 환영합니다.", (String)existsMember.getName());
-	}
-	
 }
