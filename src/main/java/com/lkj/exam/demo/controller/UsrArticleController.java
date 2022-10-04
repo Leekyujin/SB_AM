@@ -2,6 +2,8 @@ package com.lkj.exam.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,15 +23,29 @@ public class UsrArticleController {
 	// 액션 메서드
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData<Article> doAdd(String title, String body) {
-		if (Ut.empty(title)) {
-			return ResultData.from("F-2", "제목을 입력해주세요.");
-		}
-		if (Ut.empty(body)) {
-			return ResultData.from("F-3", "내용을 입력해주세요.");
+	public ResultData<Article> doAdd(HttpSession httpSession, String title, String body) {
+		
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+		
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		}
 		
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(title, body);
+		if (isLogined == false) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+		}
+		
+		if (Ut.empty(title)) {
+			return ResultData.from("F-1", "제목을 입력해주세요.");
+		}
+		
+		if (Ut.empty(body)) {
+			return ResultData.from("F-2", "내용을 입력해주세요.");
+		}
+		
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(loginedMemberId, title, body);
 		
 		Article article = articleService.getArticle((int) writeArticleRd.getData1());
 		
@@ -39,14 +55,16 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public ResultData<List<Article>> getArticles() {
+		
 		List<Article> articles = articleService.getArticles();
 		
-		return ResultData.from("S-2", "Article List", articles);
+		return ResultData.from("S-1", "Article List", articles);
 	}
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public ResultData<Integer> doDelete(int id) {
+		
 		Article article = articleService.getArticle(id);
 		
 		if (article == null) {
@@ -61,6 +79,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public ResultData<Integer> doModify(int id, String title, String body) {
+		
 		Article article = articleService.getArticle(id);
 		
 		if (article == null) {
@@ -77,6 +96,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
 	public ResultData<Article> getArticle(int id) {
+		
 		Article article = articleService.getArticle(id);
 		
 		if (article == null) {
