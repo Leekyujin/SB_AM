@@ -49,5 +49,28 @@ public class UsrMemberController {
 		
 		return ResultData.newData(joinRd, member);
 	}
+	
+	@RequestMapping("usr/member/doLogin")
+	@ResponseBody
+	public ResultData doLogin(String loginId, String loginPw, String name,
+			String nickname, String cellphoneNum, String email) {
+		
+		if (Ut.empty(loginId)) {
+			return ResultData.from("F-1", "아이디를 입력해주세요.");
+		}
+		if (Ut.empty(loginPw)) {
+			return ResultData.from("F-2", "비밀번호를 입력해주세요.");
+		}
+		
+		ResultData joinRd = memberService.login(loginId, loginPw);
+
+		if (joinRd.isFail()) {
+			return joinRd;
+		}
+		
+		Member member = memberService.getMemberById((int) joinRd.getData1());
+		
+		return ResultData.newData(joinRd, member);
+	}
 
 }
