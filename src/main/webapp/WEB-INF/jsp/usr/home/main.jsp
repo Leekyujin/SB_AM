@@ -4,10 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인</title>
+<title>MAIN</title>
+<link rel="stylesheet" href="/resource/common.css" />
+<script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-	<h1>메인 페이지</h1>
-	<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla suscipit error labore recusandae porro aliquam officia sed a voluptate voluptatibus quas aut nam magnam officiis quasi expedita nihil? Sint facilis.</div>
+	<h1 align="center">Main Page</h1>
+	
+	<header>
+		<a href="#">로고</a>
+		
+		<ul>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/usr/article/list">LIST</a></li>
+		</ul>
+	</header>
+	
 </body>
 </html>

@@ -5,11 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>LIST</title>
+<link rel="stylesheet" href="/resource/common.css" />
+<script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-	<div>list</div>
+	<h1 align="center">LIST</h1>
 	<hr />
-	<table border="1">
+	<header>
+		<a href="#">로고</a>
+		
+		<ul>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/usr/article/list">LIST</a></li>
+		</ul>
+	</header>
+	
+	<table border="1" align="center">
 		<thead>
 			<tr>
 				<th>번호</th>
