@@ -125,7 +125,7 @@ public class UsrArticleController {
 		return articleService.modifyArticle(id, title, body);
 	}
 	
-	@RequestMapping("/usr/article/getArticle")
+	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		
 		Article article = articleService.getArticle(id);
