@@ -3,7 +3,7 @@
 <c:set var="pageTitle" value="ARTICLE LIST"/>
 <%@ include file="../common/head.jspf" %>
 
-<table border="1" align="center">
+<table border="1" bordercolor="lightseagreen" align="center">
 	<thead>
 		<tr>
 			<th>번호</th>
