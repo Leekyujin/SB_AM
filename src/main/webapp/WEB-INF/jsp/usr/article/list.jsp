@@ -3,28 +3,32 @@
 <c:set var="pageTitle" value="ARTICLE LIST"/>
 <%@ include file="../common/head.jspf" %>
 
-<table border="1" bordercolor="lightseagreen" align="center">
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>날짜</th>
-			<th>제목</th>
-			<th>작성자</th>
-		</tr>
-	</thead>
+<section class="mt-8">
+	<div class="container mx-auto px-3">
+		<div class="table-box-type-1">
+			<table>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>날짜</th>
+						<th>제목</th>
+						<th>작성자</th>
+					</tr>
+				</thead>
 
-	<tbody>
-		<c:forEach var="article" items="${articles }">
-			<tr>
-				<td>${article.id}</td>
-				<td>${article.regDate.substring(2,16)}</td>
-				<td><a href="../article/detail?id=${article.id}">${article.title}</a></td>
-				<td>${article.memberId}</td>
-
-			</tr>
-		</c:forEach>
-	</tbody>
-
-</table>
+				<tbody>
+					<c:forEach var="article" items="${articles }">
+					<tr>
+						<td>${article.id}</td>
+						<td>${article.regDate.substring(2,16)}</td>
+						<td><a href="../article/detail?id=${article.id}">${article.title}</a></td>
+						<td>${article.memberId}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
 
 <%@ include file="../common/foot.jspf" %>
