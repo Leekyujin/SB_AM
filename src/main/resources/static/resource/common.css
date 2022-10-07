@@ -25,6 +25,6 @@ html>body {
 }
 
 .btn-text-link:hover {
-	color: green;
+	color: lightseagreen;
 	text-decoration: underline;
 }
