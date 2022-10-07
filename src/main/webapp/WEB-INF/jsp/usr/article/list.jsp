@@ -12,6 +12,8 @@
 				<col width="140"/>
 				<col />
 				<col width="140"/>
+				<col width="140"/>
+				<col width="140"/>
 				</colgroup>
 				<thead>
 					<tr>
@@ -19,6 +21,8 @@
 						<th>날짜</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>수정</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 
@@ -29,6 +33,8 @@
 						<td>${article.regDate.substring(2,16)}</td>
 						<td><a class="hover:text-red-600" href="../article/detail?id=${article.id}">${article.title}</a></td>
 						<td>${article.extra__writerName}</td>
+						<td><a class="hover:text-red-600" href="../article/modify?id=${article.id}">수정</a></td>
+						<td><a class="hover:text-red-600" href="../article/delete?id=${article.id}">삭제</a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
