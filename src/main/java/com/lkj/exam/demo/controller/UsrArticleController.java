@@ -48,7 +48,7 @@ public class UsrArticleController {
 		
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(loginedMemberId, title, body);
 		
-		Article article = articleService.getArticle((int) writeArticleRd.getData1());
+		Article article = articleService.getForPrintArticle((int) writeArticleRd.getData1());
 		
 		return ResultData.newData(writeArticleRd, "article", article);
 	}
@@ -56,7 +56,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model) {
 		
-		List<Article> articles = articleService.getArticles();
+		List<Article> articles = articleService.getForPrintArticles();
 
 		model.addAttribute("articles", articles);
 
@@ -79,7 +79,7 @@ public class UsrArticleController {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");
 		}
 		
-		Article article = articleService.getArticle(id);
+		Article article = articleService.getForPrintArticle(id);
 
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", id));
@@ -110,7 +110,7 @@ public class UsrArticleController {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");
 		}
 		
-		Article article = articleService.getArticle(id);
+		Article article = articleService.getForPrintArticle(id);
 
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다.", "id", id));
@@ -128,7 +128,7 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		
-		Article article = articleService.getArticle(id);
+		Article article = articleService.getForPrintArticle(id);
 		
 		model.addAttribute("article", article);
 		
