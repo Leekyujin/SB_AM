@@ -1,7 +1,5 @@
 package com.lkj.exam.demo.util;
 
-import com.lkj.exam.demo.vo.ResultData;
-
 public class Ut {
 	public static boolean empty(Object obj) {
 		
