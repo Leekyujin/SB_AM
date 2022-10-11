@@ -23,7 +23,6 @@ public class Rq {
 		
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
-		
 	}
 
 }
