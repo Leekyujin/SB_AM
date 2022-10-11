@@ -1,4 +1,4 @@
-# DB 생성
+#DB 생성
 DROP DATABASE IF EXISTS SB_AM;
 CREATE DATABASE SB_AM;
 USE SB_AM;
@@ -13,19 +13,19 @@ CREATE TABLE article(
 );
 
 # 게시물 테스트데이터 생성
-INSERT INTO article
+INSERT INTO article 
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 1',
 `body` = '내용 1';
 
-INSERT INTO article
+INSERT INTO article 
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 2',
 `body` = '내용 2';
 
-INSERT INTO article
+INSERT INTO article 
 SET regDate = NOW(),
 updateDate = NOW(),
 title = '제목 3',
@@ -38,53 +38,53 @@ CREATE TABLE `member`(
     updateDate DATETIME NOT NULL,
     loginId CHAR(20) NOT NULL,
     loginPw CHAR(60) NOT NULL,
-    `authLevel` SMALLINT(2) UNSIGNED DEFAULT 3 COMMENT '권한 레벨 (3=일반, 7=관리자)',
-    `name` CHAR(20) NOT NULL,
+    `authLevel` SMALLINT(2) UNSIGNED DEFAULT 3 COMMENT '권한 레벨 (3=일반,7=관리자)',
+    `name` CHAR(20) NOT NULL, 
     nickname CHAR(20) NOT NULL,
     cellphoneNum CHAR(20) NOT NULL,
     email CHAR(50) NOT NULL,
-    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴여부 (0=탈퇴 전, 1=탈퇴 후)',
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴여부 (0=탈퇴 전,1=탈퇴 후)',
     delDate DATETIME COMMENT '탈퇴날짜'
 );
 
 # 회원 테스트데이터 생성 (관리자)
-INSERT INTO `member`
+INSERT INTO `member` 
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'admin',
 loginPw = 'admin',
 `authLevel` = 7,
-`name` = '관리자',
-nickname  = '관리자',
+`name` = '관리자', 
+nickname = '관리자',
 cellphoneNum = '01012341234',
-email = 'kyujinlee82@gmail.com'
+email = 'kyujinlee82@gmail.com';
 
 # 회원 테스트데이터 생성 (일반)
-INSERT INTO `member`
+INSERT INTO `member` 
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test1',
 loginPw = 'test1',
-`name` = '사용자1',
-nickname  = '사용자1',
+`name` = '사용자1', 
+nickname = '사용자1',
 cellphoneNum = '01043214321',
-email = 'kyujinlee82@gmail.com'
+email = 'kyujinlee82@gmail.com';
 
-INSERT INTO `member`
+INSERT INTO `member` 
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
-`name` = '사용자2',
-nickname  = '사용자2',
+`name` = '사용자2', 
+nickname = '사용자2',
 cellphoneNum = '01067896789',
-email = 'kyujinlee82@gmail.com'
+email = 'kyujinlee82@gmail.com';
 
-SELECT * FROM article ORDER BY id DESC;
 SELECT * FROM `member`;
+SELECT * FROM article ORDER BY id DESC;
 
 # 게시물 테이블에 회원번호 칼럼 추가
-ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
 UPDATE article SET memberId = 2 WHERE memberId = 0;
 
 SELECT LAST_INSERT_ID();
