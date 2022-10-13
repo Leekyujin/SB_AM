@@ -14,11 +14,11 @@
 				<tbody>
 					<tr>
 						<th>아이디</th>
-						<td><input class="w-96" name="loginId" type="text" placeholder="아이디를 입력해주세요" /></td>
+						<td><input class="w-96" name="loginId" type="text" placeholder="아이디를 입력해주세요." /></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input class="w-96" name="loginPw" type="password" placeholder="비밀번호를 입력해주세요" /></td>
+						<td><input class="w-96" name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." /></td>
 					</tr>
 					<tr>
 						<th></th>
