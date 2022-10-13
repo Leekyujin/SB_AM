@@ -61,41 +61,41 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doLogin(HttpSession httpSession, String loginId, String loginPw) {
 		boolean isLogined = false;
-
+		
 		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 		}
-
+		
 		if (isLogined) {
 			return Ut.jsHistoryBack("이미 로그인 되었습니다");
 		}
-
+		
 		if (Ut.empty(loginId)) {
 			return Ut.jsHistoryBack("아이디를 입력해주세요");
 		}
-
+		
 		if (Ut.empty(loginPw)) {
 			return Ut.jsHistoryBack("비밀번호를 입력해주세요");
 		}
-
+		
 		Member member = memberService.getMemberByLoginId(loginId);
-
+		
 		if (member == null) {
 			return Ut.jsHistoryBack("아이디를 잘못 입력했습니다");
 		}
-
+		
 		if (member.getLoginPw().equals(loginPw) == false) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다");
 		}
-
+		
 		httpSession.setAttribute("loginedMemberId", member.getId());
-
+		
 		return Ut.jsReplace(Ut.f("%s님 환영합니다", member.getNickname()), "/");
 	}
 	
 	@RequestMapping("usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(HttpSession httpSession) {
+	public String doLogout(HttpSession httpSession) {
 		
 		boolean isLogined = false;
 
@@ -104,12 +104,12 @@ public class UsrMemberController {
 		}
 
 		if (isLogined) {
-			return ResultData.from("F-1", "로그아웃 상태입니다.");
+			return Ut.jsHistoryBack("로그아웃 상태입니다.");
 		}
 
 		httpSession.removeAttribute("loginedMemberId");
 
-		return ResultData.from("S-1", "로그아웃 되었습니다.");
+		return Ut.jsReplace("로그아웃 되었습니다.", "/");
 	}
 
 }

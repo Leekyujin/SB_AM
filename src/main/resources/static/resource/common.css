@@ -1,12 +1,12 @@
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-family: 'Y_Spotlight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 html>body {
-	font-family: 'GmarketSansMedium';
+	font-family: 'Y_Spotlight';
 }
 
 /* 라이브러리 */

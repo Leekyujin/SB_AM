@@ -18,11 +18,11 @@
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input class="w-96" name="loginPw" type="text" placeholder="비밀번호를 입력해주세요" /></td>
+						<td><input class="w-96" name="loginPw" type="password" placeholder="비밀번호를 입력해주세요" /></td>
 					</tr>
 					<tr>
 						<th></th>
-						<td><input type="submit" value="로그인" /></td>
+						<td><button class="hover:text-red-600" type="submit">로그인</button></td>
 					</tr>
 				</tbody>
 			</table>
