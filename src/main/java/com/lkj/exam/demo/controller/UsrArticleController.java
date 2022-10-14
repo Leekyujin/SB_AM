@@ -46,8 +46,6 @@ public class UsrArticleController {
 		
 		int id = (int) writeArticleRd.getData1();
 		
-//		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), (int) writeArticleRd.getData1());
-		
 		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", id);
 		}
