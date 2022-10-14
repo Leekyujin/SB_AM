@@ -5,13 +5,17 @@
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
-		<form class="table-box-type-1" method="POST" action="../article/doAdd">
+		<form class="table-box-type-1" method="POST" action="../article/doWrite">
 			<table>
 				<colgroup>
 					<col width="200" />
 				</colgroup>
 
 				<tbody>
+					<tr>
+						<th>작성자</th>
+						<td>${rq.loginedMember.nickname }</td>
+					</tr>
 					<tr>
 						<th>제목</th>
 						<td><input class="w-full input input-bordered input-info w-full max-w-xs" name="title" type="text" placeholder="제목을 입력해주세요." /></td>
@@ -22,7 +26,7 @@
 					</tr>
 					<tr>
 						<th></th>
-						<td><button class="btn btn-active btn-ghost" type="submit" value="작성">작성</button></td>
+						<td><button class="btn btn-outline btn-success" type="submit" value="작성">작성</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -30,7 +34,7 @@
 	</div>
 
 	<div class="container mx-auto px-3 btns">
-		<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+		<button class="btn-text-link btn btn-outline btn-success float-right" type="button" onclick="history.back();">뒤로가기</button>
 	</div>
 
 </section>

@@ -34,13 +34,13 @@
 			</table>
 		</div>
 		
-		<div class="btns">
-			<button type="button" class="btn-text-link btn btn-active btn-ghost" onclick="history.back();">뒤로가기</button>
+		<div class="btns float-right">
+			<button type="button" class="btn-text-link btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
 			<c:if test="${article.extra__actorCanModify }">
-			<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
+				<a class="btn-text-link btn btn-outline btn-success" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
 			<c:if test="${article.extra__actorCanDelete }">
-				<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" 
+				<a class="btn-text-link btn btn-outline btn-success" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" 
 					href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
 		</div>

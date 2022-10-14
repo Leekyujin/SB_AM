@@ -24,7 +24,14 @@ html>body {
 	color: gray;
 }
 
+/*
 .btn-text-link:hover {
 	color: lightseagreen;
 	text-decoration: underline;
+}
+*/
+
+/* 커스텀 */
+body {
+	min-width: 800px;
 }

@@ -22,15 +22,15 @@
 					</tr>
 					<tr>
 						<th></th>
-						<td><button class="btn btn-active btn-ghost" type="submit" value="로그인">로그인</button></td>
+						<td><button class="btn btn btn-outline btn-success" type="submit" value="로그인">로그인</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
 	</div>
 
-	<div class="container mx-auto px-3 btns">
-		<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+	<div class="container mx-auto px-3 btns ">
+		<button class="btn-text-link btn btn-outline btn-success float-right" type="button" onclick="history.back();">뒤로가기</button>
 	</div>
 
 </section>

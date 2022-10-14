@@ -34,13 +34,13 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td><button class="btn btn-active btn-ghost" type="submit" value="수정">수정</button></td>
+					<td><button class="btn btn-outline btn-success" type="submit" value="수정">수정</button></td>
 				</tr>
 			</table>
 		</form>
 		
-		<div class="btns">
-			<button type="button" class="btn-text-link btn btn-active btn-ghost" onclick="history.back();">뒤로가기</button>
+		<div class="btns float-right">
+			<button type="button" class="btn-text-link btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
 		</div>
 	</div>
 </section>

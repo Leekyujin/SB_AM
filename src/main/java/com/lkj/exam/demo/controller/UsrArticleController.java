@@ -24,13 +24,13 @@ public class UsrArticleController {
 
 	// 액션 메서드
 	@RequestMapping("/usr/article/write")
-	public String write(HttpServletRequest req, String title, String body) {
+	public String showWrite(HttpServletRequest req, String title, String body) {
 		return "usr/article/write";
 	}
 	
-	@RequestMapping("/usr/article/doAdd")
+	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doAdd(HttpServletRequest req, String title, String body) {
+	public String doWrite(HttpServletRequest req, String title, String body) {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
 		
