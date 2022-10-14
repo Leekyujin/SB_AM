@@ -17,22 +17,30 @@
 					<td>${article.id}</td>
 				</tr>
 				<tr>
+					<th>작성날짜</th>
+					<td>${article.regDate.substring(2,16)}</td>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td>${article.extra__writerName}</td>
+				</tr>
+				<tr>
 					<th>제목</th>
-					<td><input class="w-full" autocomplete="off" type="text" name="title" placeholder="제목을 입력해주세요." value="${article.title}" /></td>
+					<td><input class="w-full input input-bordered input-info w-full max-w-xs" autocomplete="off" type="text" name="title" placeholder="제목을 입력해주세요." value="${article.title}" /></td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea class="w-full" name="body" placeholder="내용을 입력해주세요." >${article.body }</textarea></td>
+					<td><textarea class="w-full textarea textarea-info" name="body" placeholder="내용을 입력해주세요." >${article.body }</textarea></td>
 				</tr>
 				<tr>
 					<th></th>
-					<td><button class="hover:text-red-600" type="submit" value="수정">수정</button></td>
+					<td><button class="btn btn-active btn-ghost" type="submit" value="수정">수정</button></td>
 				</tr>
 			</table>
 		</form>
 		
 		<div class="btns">
-			<button type="button" class="btn-text-link" onclick="history.back();">뒤로가기</button>
+			<button type="button" class="btn-text-link btn btn-active btn-ghost" onclick="history.back();">뒤로가기</button>
 		</div>
 	</div>
 </section>
