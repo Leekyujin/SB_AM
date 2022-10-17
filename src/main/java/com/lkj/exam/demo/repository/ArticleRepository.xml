@@ -16,7 +16,7 @@
 		FROM article AS A
 		INNER JOIN `member` AS M
 		ON A.memberId = M.id
-		ORDER BY A.id DESC
+		ORDER BY A.id DESC;
 	</select>
 	
 	<select id="getForPrintArticle" resultType="Article">

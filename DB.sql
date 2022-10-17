@@ -82,7 +82,7 @@ email = 'kyujinlee82@gmail.com';
 
 SELECT * FROM `member`;
 
-SELECT * FROM article ORDER BY id DESC;
+SELECT * FROM article WHERE boardId = 2 ORDER BY id DESC;
 
 # 게시물 테이블에 회원번호 칼럼 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
@@ -110,7 +110,7 @@ INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free1',
-`name` = '자유게시판';
+`name` = '자유';
 
 # 게시물 테이블에 boardId 칼럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER `memberId`;
@@ -122,3 +122,6 @@ UPDATE article SET boardId = 1 WHERE id IN(1,2);
 UPDATE article SET boardId = 2 WHERE id IN(3);
 
 SELECT * FROM board;
+
+
+SELECT LAST_INSERT_ID();

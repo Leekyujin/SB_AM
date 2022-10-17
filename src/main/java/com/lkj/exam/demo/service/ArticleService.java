@@ -42,7 +42,7 @@ public class ArticleService {
 		article.setExtra__actorCanModify(actorCanModifyRd.isSuccess());
 	}
 
-	public List<Article> getForPrintArticles(int actorId) {
+	public List<Article> getForPrintFreeArticles(int actorId) {
 		List<Article> articles =  articleRepository.getArticles();
 		
 		for (Article article : articles) {
