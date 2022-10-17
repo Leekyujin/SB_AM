@@ -29,10 +29,10 @@
 				<tbody>
 					<c:forEach var="article" items="${articles }">
 					<tr>
-						<td>${article.id}</td>
-						<td><a class="hover:text-red-600" href="../article/detail?id=${article.id}">${article.title}</a></td>
-						<td>${article.extra__writerName}</td>
-						<td>${article.updateDate.substring(2,16)}</td>
+						<td>${article.id }</td>
+						<td><a class="hover:text-red-600" href="../article/detail?id=${article.id }">${article.title}</a></td>
+						<td>${article.extra__writerName }</td>
+						<td>${article.updateDate.substring(2,16) }</td>
 						<td><a class="hover:text-red-600" href="../article/modify?id=${article.id }">수정</a></td>
 						<td><a class="hover:text-red-600" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" href="../article/doDelete?id=${article.id }">삭제</a></td>
 					</tr>
