@@ -3,6 +3,7 @@ package com.lkj.exam.demo.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.lkj.exam.demo.vo.Article;
 
@@ -20,5 +21,18 @@ public interface ArticleRepository {
 	public void modifyArticle(int id, String title, String body);
 
 	public int getLastInsertId();
+	
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS cnt
+			FROM article AS A
+			WHERE 1
+			<if test="boardId != 0">
+				AND A.boardId = #{boardId}
+			</if>
+			ORDER BY id DESC;
+			</script>
+			""")
+	public int getArticlesCount(int boardId);
 	
 }
