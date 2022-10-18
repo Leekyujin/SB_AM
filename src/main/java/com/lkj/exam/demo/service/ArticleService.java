@@ -52,9 +52,9 @@ public class ArticleService {
 		return articles;
 	}
 	
-	public ResultData<Integer> writeArticle(int memberId, String title, String body) {
+	public ResultData<Integer> writeArticle(int memberId, int boardId, String body, String title) {
 		
-		articleRepository.writeArticle(memberId, title, body);
+		articleRepository.writeArticle(memberId, boardId, title, body);
 		
 		int id = articleRepository.getLastInsertId();
 		

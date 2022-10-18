@@ -11,7 +11,6 @@ import com.lkj.exam.demo.vo.Rq;
 
 @Component
 public class BeforeActionInterceptor implements HandlerInterceptor{
-	
 	@Autowired
 	private Rq rq;
 	
