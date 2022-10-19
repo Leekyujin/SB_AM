@@ -18,6 +18,7 @@ import lombok.Getter;
 @Component
 @Scope(value="request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
+
 	@Getter
 	private boolean isLogined;
 	@Getter

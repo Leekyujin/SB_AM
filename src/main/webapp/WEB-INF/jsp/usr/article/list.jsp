@@ -41,11 +41,18 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="btns float-right">
-			<c:if test="${rq.isLogined() }">
-				<a class="btn-text-link btn btn-outline btn-success" href="../article/write">글 작성</a>
-			</c:if>
+		<div class="page-menu mt-3 flex justify-center">
+			<div class="btn-group">
+				<c:forEach begin="1" end="20" var="i">
+					<a class="btn btn-sm ${param.page == i ? 'btn-active' : '' }" href="?page=${i }">${i }</a>
+				</c:forEach>
+			</div>
 		</div>
+<!-- 		<div class="btns float-right"> -->
+<%-- 			<c:if test="${rq.isLogined() }"> --%>
+<!-- 				<a class="btn-text-link btn btn-outline btn-success" href="../article/write">글 작성</a> -->
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
 	</div>
 </section>
 
