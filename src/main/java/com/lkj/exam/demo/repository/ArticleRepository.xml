@@ -25,6 +25,7 @@
 		<if test="limitTake != -1">
 		LIMIT #{limitStart}, #{limitTake};
 		</if>
+		
 	</select>
 	
 	<select id="getForPrintArticle" resultType="Article">

@@ -16,6 +16,7 @@
 				<col width="100"/>
 				<col width="100"/>
 				</colgroup>
+				
 				<thead>
 					<tr>
 						<th>번호</th>
@@ -63,11 +64,15 @@
 				</c:if>
 			</div>
 		</div>
-		<div class="btns float-right">
-			<c:if test="${rq.isLogined() }">
-				<a class="btn-text-link btn btn-outline btn-success" href="../article/write">글 작성</a>
-			</c:if>
-		</div>
+<!-- 		<div class="btns float-right flex"> -->
+<!-- 			<input class="input input-bordered input-info w-full max-w-xs" type="text" name="searchKeyword" placeholder="검색어를 입력해주세요." /> -->
+<%-- 			<a class="btn-text-link btn btn-outline btn-success" href="list?searchKeyword=${searchKeyword }">검색</a> --%>
+<!-- 		</div> -->
+<!-- 		<div class="btns float-right"> -->
+<%-- 			<c:if test="${rq.isLogined() }"> --%>
+<!-- 				<a class="btn-text-link btn btn-outline btn-success" href="../article/write">글 작성</a> -->
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
 	</div>
 </section>
 
