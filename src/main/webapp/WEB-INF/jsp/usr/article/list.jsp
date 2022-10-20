@@ -5,19 +5,27 @@
 
 <section class="mt-8">
 	<div class="container mx-auto px-3">
-		<div class="btns float-right flex mb-1">
-			<select class="select select-info w-32 max-w-xs" name="searchKeywordTypeCode">
-			  <option disabled selected>게시물 선택</option>
-			  <option value='title'>제목</option>
-			  <option value='body'>내용</option>
-			</select>
-			<input class="input input-bordered input-info w-full max-w-xs" type="text" name="searchKeyword" placeholder="검색어를 입력해주세요." />
-			<a class="btn-text-link btn btn-outline btn-success"
-				href="list?boardId=${boardId }&searchKeywordTypeCode=${searchKeywordTypeCode }&searchKeyword=${searchKeyword }">검색</a>
+		<div class="flex">
+			<div class="text-xl">게시물 갯수 : <span class="badge">${articlesCount }개</span></div>
+			<div class="flex-grow"></div>
+			<form class="flex">
+				<input type="hidden" name="boardId" value=${param.boardId } />
+				
+				<select data-value="${param.searchKeywordTypeCode }" class="select select-info max-w-xs"
+					 name="searchKeywordTypeCode">
+				  <option disabled>검색</option>
+				  <option value="title">제목</option>
+				  <option value="body">내용</option>
+				  <option value="title,body">제목+내용</option>
+				</select>
+				
+				<input class="input input-bordered input-info w-96 max-w-xs ml-1" type="text" name="searchKeyword" 
+					placeholder="검색어를 입력해주세요." maxlength="20" value="${param.searchKeyword }" autocomplete="off" />
+				<button class="btn-text-link btn btn-outline btn-success ml-1" type="submit">검색</button>
+			</form>
 		</div>
-		<div>${articlesCount }개</div>
 		
-		<div class="table-box-type-1">
+		<div class="table-box-type-1 mt-3">
 			<table>
 				<colgroup>
 				<col width="80"/>
