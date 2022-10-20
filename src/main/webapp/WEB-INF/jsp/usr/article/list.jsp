@@ -6,7 +6,7 @@
 <section class="mt-8">
 	<div class="container mx-auto px-3">
 		<div class="flex">
-			<div class="text-xl">게시물 갯수 : <span class="badge">${articlesCount }개</span></div>
+			<div class="text-lg">게시물 갯수 : <span class="badge">${articlesCount }개</span></div>
 			<div class="flex-grow"></div>
 			<form class="flex">
 				<input type="hidden" name="boardId" value=${param.boardId } />
@@ -30,10 +30,11 @@
 				<colgroup>
 				<col width="80"/>
 				<col />
-				<col width="140"/>
-				<col width="200"/>
 				<col width="100"/>
-				<col width="100"/>
+				<col width="160"/>
+				<col width="80"/>
+				<col width="80"/>
+				<col width="80"/>
 				</colgroup>
 				
 				<thead>
@@ -42,6 +43,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>날짜</th>
+						<th>조회수</th>
 						<th>수정</th>
 						<th>삭제</th>
 					</tr>
@@ -54,6 +56,7 @@
 						<td><a class="hover:text-red-600" href="../article/detail?id=${article.id }">${article.title}</a></td>
 						<td>${article.extra__writerName }</td>
 						<td>${article.updateDate.substring(2,16) }</td>
+						<td>${article.hitCount }</td>
 						<td><a class="hover:text-red-600" href="../article/modify?id=${article.id }">수정</a></td>
 						<td><a class="hover:text-red-600" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
 								href="../article/doDelete?id=${article.id }">삭제</a></td>

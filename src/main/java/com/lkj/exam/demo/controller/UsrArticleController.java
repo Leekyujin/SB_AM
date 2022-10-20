@@ -17,6 +17,8 @@ import com.lkj.exam.demo.vo.Board;
 import com.lkj.exam.demo.vo.ResultData;
 import com.lkj.exam.demo.vo.Rq;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 @Controller
 public class UsrArticleController {
 	
@@ -77,8 +79,6 @@ public class UsrArticleController {
 				searchKeywordTypeCode, searchKeyword, itemsInAPage,	page);
 		
 		model.addAttribute("boardId", boardId);
-		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
-		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("board", board);
 		model.addAttribute("page", page);
 		model.addAttribute("articlesCount", articlesCount);
@@ -150,6 +150,12 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
+		
+		ResultData<Integer> increaseHitCountRd = articleService.increaseHitCount(id);
+		
+		if (increaseHitCountRd.isFail()) {
+			return rq.jsHistoryBackOnView(increaseHitCountRd.getMsg());
+		}
 		
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
