@@ -43,7 +43,7 @@
 		</form>
 	</div>
 
-	<div class="container mx-auto px-3 btns">
+	<div class="container mx-auto px-3 btns mt-1">
 		<button class="btn-text-link btn btn-outline btn-success float-right" type="button" onclick="history.back();">뒤로가기</button>
 	</div>
 

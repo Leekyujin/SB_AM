@@ -2,6 +2,8 @@ package com.lkj.exam.demo.controller;
 
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -167,7 +169,12 @@ public class UsrArticleController {
 			return increaseHitCountRd;
 		}
 		
-		return ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
+		ResultData<Integer> rd = ResultData.newData(increaseHitCountRd, "hitCount",
+				articleService.getArticleHitCount(id));
+		
+		rd.setData2("id", id);
+		
+		return rd;
 	}
 
 }

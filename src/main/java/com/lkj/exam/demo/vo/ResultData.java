@@ -14,7 +14,11 @@ public class ResultData<DT> {
 	@Getter
 	private DT data1;
 	@Getter
+	private Object data2;
+	@Getter
 	private String data1Name;
+	@Getter
+	private String data2Name;
 	
 	public static <DT> ResultData<DT> from(String resultCode, String msg) {
 		return from(resultCode, msg, null, null);
@@ -42,4 +46,8 @@ public class ResultData<DT> {
 		return from(Rd.getResultCode(), Rd.getMsg(), data1Name, data1);
 	}
 
+	public void setData2(String dataName, Object data) {
+		data2 = data;
+		data2Name = dataName;
+	}
 }
