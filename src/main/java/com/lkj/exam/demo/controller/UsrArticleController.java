@@ -2,8 +2,6 @@ package com.lkj.exam.demo.controller;
 
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +16,6 @@ import com.lkj.exam.demo.vo.Article;
 import com.lkj.exam.demo.vo.Board;
 import com.lkj.exam.demo.vo.ResultData;
 import com.lkj.exam.demo.vo.Rq;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
 public class UsrArticleController {
