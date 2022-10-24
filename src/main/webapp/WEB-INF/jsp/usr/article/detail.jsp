@@ -42,29 +42,29 @@
 			<table>
 				<tr>
 					<th>번호</th>
-					<td>${article.id}</td>
+					<td>${article.id }</td>
 				</tr>
 				<tr>
 					<th>작성날짜</th>
-					<td>${article.regDate.substring(2,16)}</td>
+					<td>${article.regDate }</td>
 				</tr>
 				<tr>
 					<th>수정날짜</th>
-					<td>${article.updateDate.substring(2,16)}</td>
+					<td>${article.updateDate }</td>
 				</tr>
 				<tr>
 					<th>조회수</th>
 					<td>
-						<span class="badge article-detail__hit-count">${article.hitCount}</span>
+						<span class="badge article-detail__hit-count">${article.hitCount }</span>
 					</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${article.extra__writerName}</td>
+					<td>${article.extra__writerName }</td>
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td>${article.title}</td>
+					<td>${article.title }</td>
 				</tr>
 				<tr>
 					<th>내용</th>
