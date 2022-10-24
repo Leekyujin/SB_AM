@@ -31,8 +31,7 @@
 				<col width="80"/>
 				<col />
 				<col width="100"/>
-				<col width="160"/>
-				<col width="70"/>
+				<col width="140"/>
 				<col width="70"/>
 				<col width="70"/>
 				<col width="60"/>
@@ -46,8 +45,7 @@
 						<th>작성자</th>
 						<th>날짜</th>
 						<th>조회수</th>
-						<th>좋아요</th>
-						<th>싫어요</th>
+						<th>추천</th>
 						<th>수정</th>
 						<th>삭제</th>
 					</tr>
@@ -61,8 +59,7 @@
 						<td>${article.extra__writerName }</td>
 						<td>${article.forPrintType1RegDate }</td>
 						<td>${article.hitCount }</td>
-						<td></td>
-						<td></td>
+						<td>${article.extra__goodReactionPoint }</td>
 						<td><a class="hover:text-red-600" href="../article/modify?id=${article.id }">수정</a></td>
 						<td><a class="hover:text-red-600" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
 								href="../article/doDelete?id=${article.id }">삭제</a></td>

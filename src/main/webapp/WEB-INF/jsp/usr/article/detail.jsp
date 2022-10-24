@@ -74,8 +74,8 @@
 		</div>
 		
 		<div class="btns mt-1 text-center">
-			<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요<span class="badge badge-accent"></span></a>
-			<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요<span class="badge badge-accent"></span></a>
+			<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요<span class="badge badge-accent">${article.extra__goodReactionPoint }</span></a>
+			<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요<span class="badge badge-accent">${article.extra__badReactionPoint }</span></a>
 		</div>
 		
 		<div class="btns float-right mt-1">
