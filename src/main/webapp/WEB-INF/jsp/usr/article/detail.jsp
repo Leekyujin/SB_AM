@@ -73,7 +73,7 @@
 			</table>
 		</div>
 		
-		<div class="btns mt-1 text-center">
+		<div class="btns mt-1 text-right">
 			<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요<span class="badge badge-accent">${article.extra__goodReactionPoint }</span></a>
 			<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요<span class="badge badge-accent">${article.extra__badReactionPoint }</span></a>
 		</div>
