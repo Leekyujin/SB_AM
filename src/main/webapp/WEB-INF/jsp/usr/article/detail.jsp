@@ -32,7 +32,7 @@
 		// ArticleDetail__increaseHitCount();
 		
 		// 연습코드
-		setTimeout(ArticleDetail__increaseHitCount, 2000);
+		setTimeout(ArticleDetail__increaseHitCount, 1000);
 	})
 </script>
 
@@ -71,6 +71,11 @@
 					<td>${article.body}</td>
 				</tr>
 			</table>
+		</div>
+		
+		<div class="btns mt-1 text-center">
+			<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요<span class="badge badge-accent"></span></a>
+			<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요<span class="badge badge-accent"></span></a>
 		</div>
 		
 		<div class="btns float-right mt-1">
