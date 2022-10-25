@@ -70,13 +70,28 @@
 					<th>내용</th>
 					<td>${article.body}</td>
 				</tr>
+				<tr>
+					<th>추천</th>
+					<td>
+						<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요 
+							<span class="badge badge-accent ml-1">${article.extra__goodReactionPoint }</span>
+						</a>
+						<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요 
+							<span class="badge badge-accent ml-1">${article.extra__badReactionPoint }</span>
+						</a>
+					</td>
+				</tr>
 			</table>
 		</div>
 		
-		<div class="btns mt-1 text-right">
-			<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요<span class="badge badge-accent">${article.extra__goodReactionPoint }</span></a>
-			<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요<span class="badge badge-accent">${article.extra__badReactionPoint }</span></a>
-		</div>
+<!-- 		<div class="btns mt-1 text-right"> -->
+<!-- 			<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요  -->
+<%-- 				<span class="badge badge-accent ml-1">${article.extra__goodReactionPoint }</span> --%>
+<!-- 			</a> -->
+<!-- 			<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요  -->
+<%-- 				<span class="badge badge-accent ml-1">${article.extra__badReactionPoint }</span> --%>
+<!-- 			</a> -->
+<!-- 		</div> -->
 		
 		<div class="btns float-right mt-1">
 			<button type="button" class="btn-text-link btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>

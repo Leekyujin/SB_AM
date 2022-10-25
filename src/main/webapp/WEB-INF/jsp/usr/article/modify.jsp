@@ -21,6 +21,21 @@
 					<td>${article.regDate.substring(2,16)}</td>
 				</tr>
 				<tr>
+					<th>수정날짜</th>
+					<td>${article.updateDate.substring(2,16)}</td>
+				</tr>
+				<tr>
+					<th>추천</th>
+					<td>
+						<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요 
+							<span class="badge badge-accent ml-1">${article.extra__goodReactionPoint }</span>
+						</a>
+						<a class="btn-text-link btn btn-outline btn-accent" href="">싫어요 
+							<span class="badge badge-accent ml-1">${article.extra__badReactionPoint }</span>
+						</a>
+					</td>
+				</tr>
+				<tr>
 					<th>작성자</th>
 					<td>${article.extra__writerName}</td>
 				</tr>
