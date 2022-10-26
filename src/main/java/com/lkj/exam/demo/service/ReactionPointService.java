@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lkj.exam.demo.repository.ReactionPointRepository;
+import com.lkj.exam.demo.vo.ResultData;
 
 @Service
 public class ReactionPointService {

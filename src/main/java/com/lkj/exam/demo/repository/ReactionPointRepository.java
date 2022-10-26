@@ -2,6 +2,7 @@ package com.lkj.exam.demo.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface ReactionPointRepository {
@@ -15,6 +16,6 @@ public interface ReactionPointRepository {
 				AND RP.memberId = #{actorId }
 			</script>
 			""")
-	int getSumReactionPointByMemberId(int actorId, String relTypeCode, int relId);
+	public int getSumReactionPointByMemberId(int actorId, String relTypeCode, int relId);
 
 }
