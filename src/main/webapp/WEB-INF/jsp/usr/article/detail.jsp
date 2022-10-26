@@ -77,12 +77,12 @@
 							<button class="btn-text-link btn btn-outline btn-accent">좋아요 👍</button>
 							<span>&nbsp;</span>
 						</c:if>
-						<span class="badge badge-accent">👍 ${article.extra__goodReactionPoint }</span>
+						<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
 						<c:if test="${actorCanMakeReaction }">
 							<button class="btn-text-link btn btn-outline btn-accent ml-2">싫어요 👎</button>
 							<span>&nbsp;</span>
 						</c:if>
-						<span class="badge badge-accent">👎 ${article.extra__badReactionPoint }</span>
+						<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 					</td>
 				</tr>
 			</table>

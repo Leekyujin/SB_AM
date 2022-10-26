@@ -59,7 +59,7 @@
 						<td>${article.extra__writerName }</td>
 						<td>${article.forPrintType1RegDate }</td>
 						<td>${article.hitCount }</td>
-						<td>${article.extra__goodReactionPoint }</td>
+						<td>${article.goodReactionPoint }</td>
 						<td><a class="hover:text-red-600" href="../article/modify?id=${article.id }">수정</a></td>
 						<td><a class="hover:text-red-600" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;"
 								href="../article/doDelete?id=${article.id }">삭제</a></td>
