@@ -8,6 +8,7 @@ import com.lkj.exam.demo.vo.ResultData;
 
 @Service
 public class ReactionPointService {
+	
 	@Autowired
 	private ReactionPointRepository reactionPointRepository;
 	@Autowired

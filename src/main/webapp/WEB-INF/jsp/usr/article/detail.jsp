@@ -74,13 +74,13 @@
 					<th>추천</th>
 					<td>
 						<c:if test="${actorCanMakeReaction }">
-							<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}" 
+							<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
 								class="btn-text-link btn btn-outline btn-accent">좋아요 👍</a>
 							<span>&nbsp;</span>
 						</c:if>
 						<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
 						<c:if test="${actorCanMakeReaction }">
-							<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}" 
+							<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
 								class="btn-text-link btn btn-outline btn-accent ml-2">싫어요 👎</a>
 							<span>&nbsp;</span>
 						</c:if>
