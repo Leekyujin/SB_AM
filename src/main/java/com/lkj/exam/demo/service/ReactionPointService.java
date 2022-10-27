@@ -10,12 +10,38 @@ import com.lkj.exam.demo.vo.ResultData;
 public class ReactionPointService {
 	@Autowired
 	private ReactionPointRepository reactionPointRepository;
+	@Autowired
+	private ArticleService articleService;
 
 	public boolean actorCanMakeReaction(int actorId, String relTypeCode, int relId) {
 		if (actorId == 0) {
 			return false;
 		}
 		return reactionPointRepository.getSumReactionPointByMemberId(actorId, relTypeCode, relId) == 0;
+	}
+
+	public ResultData addGoodReactionPoint(int actorId, String relTypeCode, int relId) {
+		reactionPointRepository.addGoodReactionPoint(actorId, relTypeCode, relId);
+		
+		switch (relTypeCode) {
+		case "article":
+			articleService.increaseGoodReactionPoint(relId);
+			break;
+		}
+		
+		return ResultData.from("S-1", "좋아요 처리되었습니다.");
+	}
+	
+	public ResultData addBadReactionPoint(int actorId, String relTypeCode, int relId) {
+		reactionPointRepository.addBadReactionPoint(actorId, relTypeCode, relId);
+		
+		switch (relTypeCode) {
+		case "article":
+			articleService.increaseBadReactionPoint(relId);
+			break;
+		}
+		
+		return ResultData.from("S-1", "싫어요 처리되었습니다.");
 	}
 
 }
