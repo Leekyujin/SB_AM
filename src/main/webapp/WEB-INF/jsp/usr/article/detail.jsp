@@ -85,11 +85,11 @@
 							<span>&nbsp;</span>
 							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 						</c:if>
-						<c:if test="${!actorCanMakeReaction }">
-							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
-							<span>&nbsp;</span>
-							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
-						</c:if>
+<%-- 						<c:if test="${!actorCanMakeReaction }"> --%>
+<%-- 							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span> --%>
+<!-- 							<span>&nbsp;</span> -->
+<%-- 							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span> --%>
+<%-- 						</c:if> --%>
 						<c:if test="${actorCanCancelGoodReaction }">
 							<span>&nbsp;</span>
 							<a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri} "

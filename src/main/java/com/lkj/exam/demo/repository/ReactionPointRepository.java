@@ -1,5 +1,6 @@
 package com.lkj.exam.demo.repository;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -44,5 +45,25 @@ public interface ReactionPointRepository {
 			</script>
 			""")
 	public void addBadReactionPoint(int actorId, String relTypeCode, int relId);
+
+	@Delete("""
+			<script>
+				DELETE FROM reactionPoint 
+				WHERE relTypeCode = #{relTypeCode }
+				AND relId = #{relId }
+				AND memberId = #{actorId }
+			</script>
+			""")
+	public void deleteGoodReactionPoint(int actorId, String relTypeCode, int relId);
+
+	@Delete("""
+			<script>
+				DELETE FROM reactionPoint 
+				WHERE relTypeCode = #{relTypeCode }
+				AND relId = #{relId }
+				AND memberId = #{actorId }
+			</script>
+			""")
+	public void deleteBadReactionPoint(int actorId, String relTypeCode, int relId);
 
 }
