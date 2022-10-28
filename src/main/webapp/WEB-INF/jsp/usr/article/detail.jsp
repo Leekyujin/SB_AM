@@ -74,13 +74,22 @@
 					<th>추천</th>
 					<td>
 						<c:if test="${actorCanMakeReaction }">
+							<span>&nbsp;</span>
 							<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
 								class="btn-text-link btn btn-outline btn-accent">좋아요 👍</a>
 							<span>&nbsp;</span>
+							<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
+								class="btn-text-link btn btn-outline btn-accent ml-2">싫어요 👎</a>
+							<span>&nbsp;</span>
 						</c:if>
 						<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
-						<c:if test="${actorCanMakeReaction }">
-							<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
+						<c:if test="${actorCanCancelGoodReaction }">
+							<span>&nbsp;</span>
+							<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
+								class="btn-text-link btn btn-outline btn-accent">좋아요 👍</a>
+							<span>&nbsp;</span>
+							<a onclick="alert(this.title); return false;" title="좋아요를 취소해주세요."
+								href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
 								class="btn-text-link btn btn-outline btn-accent ml-2">싫어요 👎</a>
 							<span>&nbsp;</span>
 						</c:if>
