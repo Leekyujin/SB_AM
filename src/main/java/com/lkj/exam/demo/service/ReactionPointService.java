@@ -19,13 +19,13 @@ public class ReactionPointService {
 			return ResultData.from("F-1", "로그인 후 이용해주세요.");
 		}
 		
-		int sumReactionPointByMemberId =  reactionPointRepository.getSumReactionPointByMemberId(actorId, relTypeCode, relId);
-		
+		int sumReactionPointByMemberId = reactionPointRepository.getSumReactionPointByMemberId(actorId, relTypeCode, relId);
+
 		if (sumReactionPointByMemberId != 0) {
-			return ResultData.from("F-2", "리액션을 할 수 없습니다.", "sumReactionPointByMemberId", sumReactionPointByMemberId);
+			return ResultData.from("F-2", "리액션을 할 수 없습니다", "sumReactionPointByMemberId", sumReactionPointByMemberId);
 		}
-		
-		return ResultData.from("S-1", "리액션을 할 수 있습니다.", "sumReactionPointByMemberId", sumReactionPointByMemberId);
+
+		return ResultData.from("S-1", "리액션을 할 수 있습니다", "sumReactionPointByMemberId", sumReactionPointByMemberId);
 	}
 	
 	public ResultData addGoodReactionPoint(int actorId, String relTypeCode, int relId) {

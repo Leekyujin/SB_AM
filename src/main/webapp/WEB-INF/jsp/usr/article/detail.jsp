@@ -75,25 +75,45 @@
 					<td>
 						<c:if test="${actorCanMakeReaction }">
 							<span>&nbsp;</span>
-							<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
-								class="btn-text-link btn btn-outline btn-accent">좋아요 👍</a>
+							<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri} "
+									class="btn-text-link btn btn-outline btn-accent">좋아요 👍</a>
 							<span>&nbsp;</span>
-							<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
-								class="btn-text-link btn btn-outline btn-accent ml-2">싫어요 👎</a>
+							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
 							<span>&nbsp;</span>
+							<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+									class="btn-text-link btn btn-outline btn-accent">싫어요 👎</a>
+							<span>&nbsp;</span>
+							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 						</c:if>
-						<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
+						<c:if test="${!actorCanMakeReaction }">
+							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
+							<span>&nbsp;</span>
+							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
+						</c:if>
 						<c:if test="${actorCanCancelGoodReaction }">
 							<span>&nbsp;</span>
-							<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
+							<a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri} "
+									class="btn btn-accent">좋아요 👍</a>
+							<span>&nbsp;</span>
+							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
+							<span>&nbsp;</span>
+							<a onclick="alert(this.title); return false;" title="좋아요를 먼저 취소해주세요." href="#" 
+									class="btn-text-link btn btn-outline btn-accent">싫어요	👎</a>
+							<span>&nbsp;</span>
+							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
+						</c:if>
+						<c:if test="${actorCanCancelBadReaction }">
+							<span>&nbsp;</span>
+							<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해주세요." href="#"
 								class="btn-text-link btn btn-outline btn-accent">좋아요 👍</a>
 							<span>&nbsp;</span>
-							<a onclick="alert(this.title); return false;" title="좋아요를 취소해주세요."
-								href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}" 
-								class="btn-text-link btn btn-outline btn-accent ml-2">싫어요 👎</a>
+							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span>
 							<span>&nbsp;</span>
+							<a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"	
+								class="btn btn-accent">싫어요	👎</a>
+							<span>&nbsp;</span>
+							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 						</c:if>
-						<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 					</td>
 				</tr>
 			</table>
