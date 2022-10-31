@@ -158,11 +158,5 @@ public class ArticleService {
 		
 		return ResultData.from("S-1", "좋아요 감소", "affectedRowsCount", affectedRowsCount);
 	}
-
-	public ResultData writeReply(int memberId, String relTypeCode, int relId, String body) {
-		articleRepository.writeArticleReply(memberId, relTypeCode, relId, body);
-		
-		return ResultData.from("S-1", "댓글이 작성되었습니다.");
-	}
 	
 }

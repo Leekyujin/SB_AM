@@ -58,25 +58,6 @@ public class UsrArticleController {
 		return rq.jsReplace(Ut.f("%d번 게시물이 작성되었습니다.", id), replaceUri);
 	}
 	
-	@RequestMapping("/usr/article/doWriteReply")
-	@ResponseBody
-	public String doWriteReply(int id, String body, String replaceUri) {
-		
-		if (Ut.empty(body)) {
-			return rq.jsHistoryBack("내용을 입력해주세요.");
-		}
-		
-		articleService.writeReply(rq.getLoginedMemberId(), "article", id, body);
-		
-		
-		
-		if (Ut.empty(replaceUri)) {
-			replaceUri = Ut.f("../article/detail?id=%d", id);
-		}
-		
-		return rq.jsReplace("댓글이 작성되었습니다.", replaceUri);
-	}
-	
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model,@RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title, body") String searchKeywordTypeCode,

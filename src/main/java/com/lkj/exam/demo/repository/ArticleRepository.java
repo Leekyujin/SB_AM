@@ -91,6 +91,4 @@ public interface ArticleRepository {
 			""")
 	public int decreaseBadReactionPoint(int relId);
 
-	public void writeArticleReply(int memberId, String relTypeCode, int relId, String body);
-	
 }
