@@ -90,5 +90,7 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int decreaseBadReactionPoint(int relId);
+
+	public void writeArticleReply(int memberId, String relTypeCode, int relId, String body);
 	
 }

@@ -119,6 +119,29 @@
 			</table>
 		</div>
 		
+		<form class="table-box-type-1" method="POST" action="../article/doWriteReply">
+			<table>
+				<colgroup>
+					<col width="200" />
+				</colgroup>
+
+				<tbody>
+					<tr>
+						<th>작성자</th>
+						<td>${rq.loginedMember.nickname }</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><textarea required="required" class="w-full textarea textarea-info" name="body" placeholder="내용을 입력해주세요."></textarea></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td><button class="btn btn-outline btn-success" type="submit" value="작성">작성</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		
 <!-- 		<div class="btns mt-1 text-right"> -->
 <!-- 			<a class="btn-text-link btn btn-outline btn-accent" href="">좋아요  -->
 <%-- 				<span class="badge badge-accent ml-1">${article.extra__goodReactionPoint }</span> --%>
