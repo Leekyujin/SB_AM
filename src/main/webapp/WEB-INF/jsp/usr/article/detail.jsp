@@ -210,13 +210,13 @@
 	<div class="container mx-auto px-3">
 		<h2>댓글 리스트(${repliesCount })</h2>
 		<c:if test="${rq.logined }">
-			<div class="table-box-type-1 mt-3">
+			<div class="table-box-type-1 mt-1 mb-2">
 				<table>
 					<colgroup>
-						<col width="200" />
-						<col width="500" />
-						<col width="200" />
-						<col width="200" />
+						<col width="80" />
+						<col  />
+						<col width="120" />
+						<col width="120" />
 					</colgroup>
 	
 					<thead>
@@ -229,12 +229,12 @@
 					</thead>
 	
 					<tbody>
-						<c:forEach var="article" items="${articles }">
+						<c:forEach var="reply" items="${replies }">
 						<tr>
 							<td>${reply.id }</td>
 							<td>${reply.body }</td>
-							<td>${article.extra__writerName }</td>
-							<td>${article.forPrintType1RegDate }</td>
+							<td>${reply.extra__writerName }</td>
+							<td>${reply.forPrintType1RegDate }</td>
 						</tr>
 						</c:forEach>
 					</tbody>

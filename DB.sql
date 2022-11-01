@@ -221,6 +221,15 @@ relId = 2,
 `body` = '댓글 4';
 
 # 게시물 테이블에 goodReactionPoint 칼럼 추가
+ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# 게시물 테이블에 badReactionPoint 칼럼 추가
+ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# 댓글 테이블에 인덱스 걸기
+ALTER TABLE `SB_AM`.`reply` ADD INDEX (`relTypeCode` , `relId`); 
+
+# 게시물 테이블에 goodReactionPoint 칼럼 추가
 ALTER TABLE article ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 게시물 테이블에 badReactionPoint 칼럼 추가
@@ -238,6 +247,14 @@ INNER JOIN (
 ON A.id = RP_SUM.relId
 SET A.goodReactionPoint = RP_SUM.goodReactionPoint,
 A.badReactionPoint = RP_SUM.badReactionPoint
+ 
+-- explain SELECT R.*, M.nickname AS extra__writerName
+-- FROM reply AS R
+-- LEFT JOIN `member` AS M
+-- ON R.memberId = M.id
+-- WHERE R.relTypeCode = 'article'
+-- AND R.relId = 1
+-- ORDER BY R.id DESC
 
 #####################################################################
 
@@ -270,11 +287,11 @@ FROM reactionPoint AS RP
 GROUP BY RP.relTypeCode, RP.relId
 */
 
-SELECT A.*, M.nickname AS extra__writerName
-FROM article AS A
-LEFT JOIN `member` AS M
-ON A.memberId = M.id
-ORDER BY A.id DESC
+-- SELECT A.*, M.nickname as extra__writerName
+-- FROM article as A
+-- LEFT JOIN `member` AS M
+-- on A.memberId = M.id
+-- ORDER BY A.id DESC
 
 /*
 select ifnull(sum(RP.point),0) AS s
@@ -301,18 +318,18 @@ and A.id = RP.relId
 group by A.id
 */
 
-SELECT A.*, M.nickname AS extra__writerName,
-IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
-IFNULL(SUM(IF(RP.point > 0, RP.point, 0)),0) AS extra__goodReactionPoint,
-IFNULL(SUM(IF(RP.point < 0, RP.point, 0)),0) AS extra__badReactionPoint
-FROM article AS A
-LEFT JOIN `member` AS M
-ON A.memberId = M.id
-LEFT JOIN reactionPoint AS RP
-ON RP.relTypeCode = 'article'
-AND A.id = RP.relId
-WHERE A.id = 3
-GROUP BY A.id;
+-- SELECT A.*, M.nickname AS extra__writerName,
+-- IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
+-- IFNULL(SUM(IF(RP.point > 0, RP.point, 0)),0) AS extra__goodReactionPoint,
+-- IFNULL(SUM(IF(RP.point < 0, RP.point, 0)),0) AS extra__badReactionPoint
+-- fROM article AS A
+-- left JOIN `member` AS M
+-- ON A.memberId = M.id
+-- LEFT JOIN reactionPoint AS RP
+-- ON RP.relTypeCode = 'article'
+-- AND A.id = RP.relId
+-- where A.id = 3
+-- GROUP BY A.id;
 
 /*#게시물 갯수 늘리기
 insert into article

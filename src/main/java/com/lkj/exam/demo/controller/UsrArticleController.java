@@ -170,6 +170,7 @@ public class UsrArticleController {
 		model.addAttribute("actorCanMakeReactionRd", actorCanMakeReactionRd);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());
 		model.addAttribute("repliesCount", repliesCount);
+		model.addAttribute("replies", replies);
 
 		if (actorCanMakeReactionRd.getResultCode().equals("F-2")) {
 			int sumReactionPointByMemberId = (int) actorCanMakeReactionRd.getData1();
