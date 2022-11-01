@@ -37,32 +37,7 @@
 	})
 </script>
 
-<script>
-	// 댓글관련
-	let ReplyWrite__submitFormDone = false;
-	function ReplyWrite__submitForm(form) {
-		if (ReplyWrite__submitFormDone) {
-			return;
-		}
-		
-		form.body.value = form.body.value.trim();
-		
-		if (form.body.value.length == 0) {
-			alert('댓글을 입력해주세요');
-			form.body.focus();
-			return;
-		}
-		
-		if (form.body.value.length < 2) {
-			alert('2글자 이상 입력해주세요');
-			form.body.focus();
-			return;
-		}
-		
-		ReplyWrite__submitFormDone = true;
-		form.submit();
-	}
-</script>
+
 
 <section class="mt-8">
 	<div class="container mx-auto px-3">
@@ -164,43 +139,33 @@
 	</div>
 </section>
 
-<section class="mt-3">
-	<div class="container mx-auto px-3">
-		<h2>댓글</h2>
-		<c:if test="${rq.logined }">
-			<div class="table-box-type-1 mt-3">
-				<table>
-					<colgroup>
-						<col width="200" />
-						<col width="500" />
-						<col width="200" />
-						<col width="200" />
-					</colgroup>
-	
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>내용</th>
-							<th>작성자</th>
-							<th>날짜</th>
-						</tr>
-					</thead>
-	
-					<tbody>
-						<c:forEach var="article" items="${articles }">
-						<tr>
-							<td>${reply.id }</td>
-							<td>${reply.body }</td>
-							<td>${article.extra__writerName }</td>
-							<td>${article.forPrintType1RegDate }</td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</c:if>
-	</div>
-</section>
+<!--                                                                               -->
+<script>
+	// 댓글관련
+	let ReplyWrite__submitFormDone = false;
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+		
+		form.body.value = form.body.value.trim();
+		
+		if (form.body.value.length == 0) {
+			alert('댓글을 입력해주세요');
+			form.body.focus();
+			return;
+		}
+		
+		if (form.body.value.length < 2) {
+			alert('2글자 이상 입력해주세요');
+			form.body.focus();
+			return;
+		}
+		
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+	}
+</script>
 
 <section class="mt-3">
 	<div class="container mx-auto px-3">
@@ -237,6 +202,44 @@
 		</c:if>
 		<c:if test="${rq.notLogined }">
 			<a class="btn btn-outline btn-success" href="/usr/member/login">로그인</a> 후 이용해주세요.
+		</c:if>
+	</div>
+</section>
+
+<section class="mt-3">
+	<div class="container mx-auto px-3">
+		<h2>댓글 리스트(${repliesCount })</h2>
+		<c:if test="${rq.logined }">
+			<div class="table-box-type-1 mt-3">
+				<table>
+					<colgroup>
+						<col width="200" />
+						<col width="500" />
+						<col width="200" />
+						<col width="200" />
+					</colgroup>
+	
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>내용</th>
+							<th>작성자</th>
+							<th>날짜</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<c:forEach var="article" items="${articles }">
+						<tr>
+							<td>${reply.id }</td>
+							<td>${reply.body }</td>
+							<td>${article.extra__writerName }</td>
+							<td>${article.forPrintType1RegDate }</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</c:if>
 	</div>
 </section>
