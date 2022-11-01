@@ -210,9 +210,9 @@
 
 <section class="mt-5 mb-2">
 	<div class="container mx-auto px-3">
-		<h2>댓글 작성</h2>
+		<h2>댓글 수정</h2>
 		<c:if test="${rq.logined }">
-			<form class="table-box-type-1" method="POST" action="../reply/doWrite"
+			<form class="table-box-type-1" method="POST" action="../reply/doModify"
 				onsubmit="ReplyWrite__submitForm(this); return false;">
 				<input type="hidden" name="relTypeCode" value = "article"/>
 				<input type="hidden" name="relId" value = "${article.id }"/>
@@ -234,7 +234,7 @@
 						<tr>
 							<th></th>
 							<td>
-								<button class="btn btn-outline btn-success" type="submit">댓글 작성</button>
+								<button class="btn btn-outline btn-success" type="submit">댓글 수정</button>
 							</td>
 						</tr>
 					</tbody>

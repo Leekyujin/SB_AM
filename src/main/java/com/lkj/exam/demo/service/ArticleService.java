@@ -22,7 +22,7 @@ public class ArticleService {
 	
 	public Article getForPrintArticle(int actorId, int id) {
 		
-		Article article =  articleRepository.getForPrintArticle(id);
+		Article article = articleRepository.getForPrintArticle(id);
 		
 		updateForPrintData(actorId, article);
 		
