@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${article.body}</td>
+					<td>${article.getForPirntBody() }</td>
 				</tr>
 				<tr>
 					<th>추천</th>
@@ -169,6 +169,47 @@
 
 <section class="mt-3">
 	<div class="container mx-auto px-3">
+		<h2>댓글 목록(${repliesCount })</h2>
+		<c:if test="${rq.logined }">
+			<div class="table-box-type-1 mt-1">
+				<table>
+					<colgroup>
+						<col width="70" />
+						<col  />
+						<col width="100" />
+						<col width="120" />
+						<col width="70" />
+					</colgroup>
+	
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>내용</th>
+							<th>작성자</th>
+							<th>날짜</th>
+							<th>추천</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<c:forEach var="reply" items="${replies }">
+						<tr class="hover">
+							<td>${reply.id }</td>
+							<td class="text-left">${reply.getForPirntBody() }</td>
+							<td>${reply.extra__writerName }</td>
+							<td>${reply.regDate }</td>
+							<td>${reply.goodReactionPoint }</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</c:if>
+	</div>
+</section>
+
+<section class="mt-5 mb-2">
+	<div class="container mx-auto px-3">
 		<h2>댓글 작성</h2>
 		<c:if test="${rq.logined }">
 			<form class="table-box-type-1" method="POST" action="../reply/doWrite"
@@ -202,44 +243,6 @@
 		</c:if>
 		<c:if test="${rq.notLogined }">
 			<a class="btn btn-outline btn-success" href="/usr/member/login">로그인</a> 후 이용해주세요.
-		</c:if>
-	</div>
-</section>
-
-<section class="mt-3">
-	<div class="container mx-auto px-3">
-		<h2>댓글 리스트(${repliesCount })</h2>
-		<c:if test="${rq.logined }">
-			<div class="table-box-type-1 mt-1 mb-2">
-				<table>
-					<colgroup>
-						<col width="80" />
-						<col  />
-						<col width="120" />
-						<col width="120" />
-					</colgroup>
-	
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>내용</th>
-							<th>작성자</th>
-							<th>날짜</th>
-						</tr>
-					</thead>
-	
-					<tbody>
-						<c:forEach var="reply" items="${replies }">
-						<tr>
-							<td>${reply.id }</td>
-							<td>${reply.body }</td>
-							<td>${reply.extra__writerName }</td>
-							<td>${reply.forPrintType1RegDate }</td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
 		</c:if>
 	</div>
 </section>

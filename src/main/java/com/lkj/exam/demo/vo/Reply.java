@@ -25,4 +25,8 @@ public class Reply {
 	public String getForPrintType1RegDate() {
 		return regDate.substring(2, 16).replace(" ", "<br />");
 	}
+	
+	public String getForPirntBody() {
+		return body.replaceAll("\n", "<br />");
+	}
 }
