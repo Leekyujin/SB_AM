@@ -164,7 +164,45 @@
 	</div>
 </section>
 
-<section class="mt-1">
+<section class="mt-3">
+	<div class="container mx-auto px-3">
+		<h2>댓글</h2>
+		<c:if test="${rq.logined }">
+			<div class="table-box-type-1 mt-3">
+				<table>
+					<colgroup>
+						<col width="200" />
+						<col width="500" />
+						<col width="200" />
+						<col width="200" />
+					</colgroup>
+	
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>내용</th>
+							<th>작성자</th>
+							<th>날짜</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<c:forEach var="article" items="${articles }">
+						<tr>
+							<td>${reply.id }</td>
+							<td>${reply.body }</td>
+							<td>${article.extra__writerName }</td>
+							<td>${article.forPrintType1RegDate }</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</c:if>
+	</div>
+</section>
+
+<section class="mt-3">
 	<div class="container mx-auto px-3">
 		<h2>댓글 작성</h2>
 		<c:if test="${rq.logined }">

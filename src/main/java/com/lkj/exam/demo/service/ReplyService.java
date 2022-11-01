@@ -22,8 +22,8 @@ public class ReplyService {
 		replyRepository.writeReply(actorId, relTypeCode, relId, body);
 		
 		int id = replyRepository.getLastInsertId();
-		
-		return ResultData.from("S-1", Ut.f("%s번 댓글이 등록되었습니다.", id), "id", id);
+
+		return ResultData.from("S-1", Ut.f("%d번 댓글이 등록되었습니다", id), "id", id);
 	}
 	
 }

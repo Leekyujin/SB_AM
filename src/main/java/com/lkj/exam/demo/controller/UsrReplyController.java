@@ -21,31 +21,31 @@ public class UsrReplyController {
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
 	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
-		
+
 		if (Ut.empty(relTypeCode)) {
-			return rq.jsHistoryBack("relTypeCode을(를) 입력해주세요.");
+			return rq.jsHistoryBack("relTypeCode을(를) 입력해주세요");
 		}
-		
+
 		if (Ut.empty(relId)) {
-			return rq.jsHistoryBack("relId을(를) 입력해주세요.");
+			return rq.jsHistoryBack("relId을(를) 입력해주세요");
 		}
-		
+
 		if (Ut.empty(body)) {
-			return rq.jsHistoryBack("내용을(를) 입력해주세요.");
+			return rq.jsHistoryBack("body을(를) 입력해주세요");
 		}
 
 		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
-		
-		int id = (int) writeReplyRd.getData1();
-		
+
+		int id = writeReplyRd.getData1();
+
 		if (Ut.empty(replaceUri)) {
-			switch(relTypeCode) {
+			switch (relTypeCode) {
 			case "article":
-				replaceUri = Ut.f("../article/detail?id=%d", id);
+				replaceUri = Ut.f("../article/detail?id=%d", relId);
 				break;
 			}
 		}
-		
+
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
 	
