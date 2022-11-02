@@ -72,7 +72,7 @@ public interface ReplyRepository {
 					<if test="body != null and body != ''">`body` = #{body},</if> 
 					updateDate = NOW() 
 				</set>
-				WHERE AND id = #{id }
+				WHERE id = #{id }
 			</script>
 			""")
 	public void modifyReply(String body, int id);

@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lkj.exam.demo.service.ArticleService;
 import com.lkj.exam.demo.service.ReplyService;
 import com.lkj.exam.demo.util.Ut;
+import com.lkj.exam.demo.vo.Article;
 import com.lkj.exam.demo.vo.Member;
 import com.lkj.exam.demo.vo.Reply;
 import com.lkj.exam.demo.vo.ResultData;
@@ -18,6 +20,8 @@ public class UsrReplyController {
 	
 	@Autowired
 	private ReplyService replyService;
+	@Autowired
+	private ArticleService articleService;
 	@Autowired
 	private Rq rq;
 	
@@ -52,6 +56,59 @@ public class UsrReplyController {
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
 
+	@RequestMapping("/usr/reply/modify")
+	public String showModify(Model model, int id, String replaceUri) {
+		
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack("id가 없습니다.");
+		}
+		
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+
+		if (reply == null) {
+			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
+		}
+
+		if (reply.isExtra__actorCanDelete() == false) {
+			return rq.jsHistoryBack("해당 댓글에 대한 권한이 없습니다.");
+		}
+		
+		String relDataTitle = null;
+		
+		switch (reply.getRelTypeCode()) {
+		case "article":
+			Article article = articleService.getArticle(id);
+			relDataTitle = article.getTitle();
+			break;
+		}
+
+		model.addAttribute("reply", reply);
+		model.addAttribute("relDataTitle", relDataTitle);
+		
+		return "usr/reply/modify";
+	}
+
+	@RequestMapping("/usr/reply/doModify")
+	@ResponseBody
+	public String doModify(Member member, int id, String body) {
+		
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+		
+		if (reply == null) {
+			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
+		}
+		
+		ResultData modifyRd = replyService.actorCanModify(rq.getLoginedMember(), reply);
+		
+		if (modifyRd.isFail()) {
+			return rq.jsHistoryBack(modifyRd.getMsg());
+		}
+		
+		replyService.modifyReply(member, body, id);
+		
+		return rq.jsReplace(Ut.f("%d번 댓글을 수정했습니다.", id), Ut.f("../article/detail?id=%d", reply.getRelId()));
+	}
+	
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
 	public String doDelete(int id, String replaceUri) {
@@ -81,47 +138,6 @@ public class UsrReplyController {
 		}
 
 		return rq.jsReplace(deleteReplyRd.getMsg(), replaceUri);
-	}
-	
-	@RequestMapping("/usr/reply/modify")
-	public String showModify(Model model, int id) {
-		
-		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
-		
-		if (reply == null) {
-			return rq.jsHistoryBackOnView(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
-		}
-		
-		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMember(), reply);
-		
-		if (actorCanModifyRd.isFail()) {
-			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
-		}
-		
-		model.addAttribute("reply", reply);
-		
-		return "usr/article/modify";
-	}
-	
-	@RequestMapping("/usr/reply/doModify")
-	@ResponseBody
-	public String doModify(Member member, int id, String body) {
-		
-		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
-		
-		if (reply == null) {
-			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
-		}
-		
-		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMember(), reply);
-		
-		if (actorCanModifyRd.isFail()) {
-			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
-		}
-		
-		replyService.modifyReply(member, body, id);
-		
-		return rq.jsReplace(Ut.f("%d번 댓글을 수정했습니다.", id), Ut.f("../article/detail?id=%d", id));
 	}
 	
 }

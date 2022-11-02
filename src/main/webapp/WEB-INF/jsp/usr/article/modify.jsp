@@ -3,9 +3,36 @@
 <c:set var="pageTitle" value="ARTICLE MODIFY"/>
 <%@ include file="../common/head.jspf" %>
 
+<script>
+	let ArticleModify__submitDone = false;
+	function ArticleModify__submit(form) {
+		if (ArticleModify__submitDone) {
+			return;
+		}
+		
+		form.body.value = form.body.value.trim();
+		
+		if (form.body.value.length == 0) {
+			alert('댓글을 입력해주세요');
+			form.body.focus();
+			return;
+		}
+		
+		if (form.body.value.length < 2) {
+			alert('2글자 이상 입력해주세요');
+			form.body.focus();
+			return;
+		}
+		
+		ArticleModify__submitDone = true;
+		form.submit();
+	}
+</script>
+
 <section class="mt-8">
 	<div class="container mx-auto px-3">
-		<form class="table-box-type-1" method="POST" action="../article/doModify">
+		<form class="table-box-type-1" method="POST" action="../article/doModify"
+			onsubmit="ArticleModify__submit(this); return false;">
 		<input type="hidden" name="id" value="${article.id }"/>
 			<table>
 				<colgroup>
@@ -44,10 +71,6 @@
 					<td>${article.extra__writerName}</td>
 				</tr>
 				<tr>
-					<th>제목</th>
-					<td><input class="w-full input input-bordered input-info w-full max-w-xs" autocomplete="off" type="text" name="title" placeholder="제목을 입력해주세요." value="${article.title}" /></td>
-				</tr>
-				<tr>
 					<th>내용</th>
 					<td><textarea class="w-full textarea textarea-info" name="body" placeholder="내용을 입력해주세요." >${article.body }</textarea></td>
 				</tr>
@@ -58,7 +81,7 @@
 			</table>
 		</form>
 		
-		<div class="btns float-right">
+		<div class="btns float-right mt-1">
 			<button type="button" class="btn-text-link btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
 		</div>
 	</div>

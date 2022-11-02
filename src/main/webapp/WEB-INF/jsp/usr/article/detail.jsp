@@ -37,8 +37,6 @@
 	})
 </script>
 
-
-
 <section class="mt-8">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">

@@ -158,5 +158,9 @@ public class ArticleService {
 		
 		return ResultData.from("S-1", "좋아요 감소", "affectedRowsCount", affectedRowsCount);
 	}
+
+	public Article getArticle(int id) {
+		return articleRepository.getArticle(id);
+	}
 	
 }
