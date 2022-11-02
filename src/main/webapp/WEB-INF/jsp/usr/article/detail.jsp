@@ -203,10 +203,10 @@
 							<td>${reply.goodReactionPoint }</td>
 							<td>
 								<c:if test="${reply.extra__actorCanModify }">
-									<a class="btn btn-outline btn-success" href="../reply/modify?id=${reply.id }">수정</a>
+									<a class="btn-text-link btn btn-outline btn-success" href="../reply/modify?id=${reply.id }">수정</a>
 								</c:if>
 								<c:if test="${reply.extra__actorCanDelete }">
-									<a class="btn btn-outline btn-success" 
+									<a class="btn-text-link btn btn-outline btn-success" 
 										onclick="if(confirm('삭제하시겠습니까?') == false) return false;" 
 										href="../reply/doDelete?id=${reply.id }">삭제</a>
 								</c:if>
@@ -246,7 +246,7 @@
 						<tr>
 							<th></th>
 							<td>
-								<button class="btn btn-outline btn-success" type="submit">댓글 작성</button>
+								<button class="btn-text-link btn btn-outline btn-success" type="submit">댓글 작성</button>
 							</td>
 						</tr>
 					</tbody>
@@ -254,7 +254,7 @@
 			</form>
 		</c:if>
 		<c:if test="${rq.notLogined }">
-			<a class="btn btn-outline btn-success" href="/usr/member/login">로그인</a> 후 이용해주세요.
+			<a class="btn-text-link btn btn-outline btn-success" href="/usr/member/login">로그인</a> 후 이용해주세요.
 		</c:if>
 	</div>
 </section>

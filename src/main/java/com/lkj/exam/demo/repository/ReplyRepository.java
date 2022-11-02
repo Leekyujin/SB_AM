@@ -52,23 +52,18 @@ public interface ReplyRepository {
 				FROM reply AS R
 				LEFT JOIN `member` AS M
 				ON R.memberId = M.id
-				WHERE 1
-				AND R.relTypeCode = #{relTypeCode }
-				AND R.relId = #{relId }
-				AND R.id = #{id }
+				WHERE R.id = #{id }
 			</script>
 			""")
-	public Reply getForPrintReply(int id, String relTypeCode, int relId);
+	public Reply getForPrintReply(int id);
 
 	@Delete("""
 			<script>
 				DELETE FROM reply 
-				WHERE R.relTypeCode = #{relTypeCode }
-				AND R.relId = #{relId }
-				AND R.id = #{id }
+				WHERE id = #{id }
 			</script>
 			""")
-	public void deleteReply(String relTypeCode, int relId, int id);
+	public void deleteReply(int id);
 
 	@Update("""
 			<script>
@@ -77,11 +72,9 @@ public interface ReplyRepository {
 					<if test="body != null and body != ''">`body` = #{body},</if> 
 					updateDate = NOW() 
 				</set>
-				WHERE relTypeCode = #{relTypeCode }
-				AND relId = #{relId }
-				AND id = #{id }
+				WHERE AND id = #{id }
 			</script>
 			""")
-	public void modifyReply(String relTypeCode, int relId, String body, int id);
+	public void modifyReply(String body, int id);
 
 }

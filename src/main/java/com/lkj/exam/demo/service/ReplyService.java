@@ -80,24 +80,26 @@ public class ReplyService {
 		return ResultData.from("S-1", "수정 가능");
 	}
 
-	public Reply getForPrintReply(Member member, int id, String relTypeCode, int relId) {
+	public Reply getForPrintReply(Member actor, int id) {
 		
-		Reply reply =  replyRepository.getForPrintReply(id, relTypeCode, relId);
+		Reply reply =  replyRepository.getForPrintReply(id);
 		
-		updateForPrintData(member, reply);
+		updateForPrintData(actor, reply);
 		
 		return reply;
 	}
 
-	public void deleteReply(String relTypeCode, int relId, int id) {
-		replyRepository.deleteReply(relTypeCode, relId, id);
+	public ResultData deleteReply(int id) {
+		replyRepository.deleteReply(id);
+		
+		return ResultData.from("S-1", Ut.f("%d번 댓글을 삭제했습니다.", id));
 	}
 
-	public ResultData<Reply> modifyReply(Member member, String relTypeCode, int relId, String body, int id) {
+	public ResultData<Reply> modifyReply(Member member, String body, int id) {
 		
-		replyRepository.modifyReply(relTypeCode, relId, body, id);
+		replyRepository.modifyReply(body, id);
 		
-		Reply reply =  getForPrintReply(member, id, relTypeCode, relId);
+		Reply reply = getForPrintReply(member, id);
 		
 		return ResultData.from("S-1", Ut.f("%d번 댓글을 수정했습니다.", id), "reply", reply);
 	}
