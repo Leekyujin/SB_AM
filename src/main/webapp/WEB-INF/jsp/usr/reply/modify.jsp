@@ -92,11 +92,7 @@
 							<span>&nbsp;</span>
 							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 						</c:if>
-<%-- 						<c:if test="${!actorCanMakeReaction }"> --%>
-<%-- 							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span> --%>
-<!-- 							<span>&nbsp;</span> -->
-<%-- 							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span> --%>
-<%-- 						</c:if> --%>
+						
 						<c:if test="${actorCanCancelGoodReaction }">
 							<span>&nbsp;</span>
 							<a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri} "
@@ -167,47 +163,6 @@
 	}
 </script>
 
-<section class="mt-3">
-	<div class="container mx-auto px-3">
-		<h2>댓글 목록(${repliesCount })</h2>
-		<c:if test="${rq.logined }">
-			<div class="table-box-type-1 mt-1">
-				<table>
-					<colgroup>
-						<col width="70" />
-						<col  />
-						<col width="100" />
-						<col width="120" />
-						<col width="70" />
-					</colgroup>
-	
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>내용</th>
-							<th>작성자</th>
-							<th>날짜</th>
-							<th>추천</th>
-						</tr>
-					</thead>
-	
-					<tbody>
-						<c:forEach var="reply" items="${replies }">
-						<tr>
-							<td>${reply.id }</td>
-							<td class="text-left">${reply.getForPirntBody() }</td>
-							<td>${reply.extra__writerName }</td>
-							<td>${reply.regDate }</td>
-							<td>${reply.goodReactionPoint }</td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</c:if>
-	</div>
-</section>
-
 <section class="mt-5 mb-2">
 	<div class="container mx-auto px-3">
 		<h2>댓글 수정</h2>
@@ -216,6 +171,7 @@
 				onsubmit="ReplyWrite__submitForm(this); return false;">
 				<input type="hidden" name="relTypeCode" value = "article"/>
 				<input type="hidden" name="relId" value = "${article.id }"/>
+				<input type="hidden" name="id" value = "${reply.id }"/>
 				<table>
 					<colgroup>
 						<col width="200" />
@@ -229,7 +185,7 @@
 						<tr>
 							<th>내용</th>
 							<td><textarea class="w-full textarea textarea-info" name="body" 
-								placeholder="댓글을 입력해주세요." rows="5"></textarea></td>
+								placeholder="${reply.body }" rows="5"></textarea></td>
 						</tr>
 						<tr>
 							<th></th>

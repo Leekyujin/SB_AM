@@ -44,7 +44,7 @@ public interface ReplyRepository {
 				ORDER BY R.id ASC
 			</script>
 			""")
-	public List<Reply> getFroPrintReplies(int actorId, String relTypeCode, int relId);
+	public List<Reply> getFroPrintReplies(String relTypeCode, int relId);
 
 	@Select("""
 			<script>
@@ -58,7 +58,7 @@ public interface ReplyRepository {
 				AND R.id = #{id }
 			</script>
 			""")
-	public Reply getForPrintReply(int actorId, String relTypeCode, int relId, int id);
+	public Reply getForPrintReply(int id, String relTypeCode, int relId);
 
 	@Delete("""
 			<script>

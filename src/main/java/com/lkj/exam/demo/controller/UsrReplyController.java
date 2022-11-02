@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lkj.exam.demo.service.ReplyService;
 import com.lkj.exam.demo.util.Ut;
-import com.lkj.exam.demo.vo.Article;
+import com.lkj.exam.demo.vo.Member;
 import com.lkj.exam.demo.vo.Reply;
 import com.lkj.exam.demo.vo.ResultData;
 import com.lkj.exam.demo.vo.Rq;
@@ -53,15 +53,15 @@ public class UsrReplyController {
 	}
 	
 	@RequestMapping("/usr/reply/modify")
-	public String showModify(Model model, String relTypeCode, int relId, int id) {
+	public String showModify(Model model, int id, String relTypeCode, int relId) {
 		
-		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), relTypeCode, relId, id);
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id, relTypeCode, relId);
 		
 		if (reply == null) {
-			return rq.jsHistoryBackOnView(Ut.f("%d번 게시물은 존재하지 않습니다.", relId));
+			return rq.jsHistoryBackOnView(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
 		}
 		
-		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), reply);
+		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMember(), reply);
 		
 		if (actorCanModifyRd.isFail()) {
 			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
@@ -74,42 +74,42 @@ public class UsrReplyController {
 	
 	@RequestMapping("/usr/reply/doModify")
 	@ResponseBody
-	public String doModify(int actorId, String relTypeCode, int relId, String body, int id) {
+	public String doModify(Member member, int id, String relTypeCode, int relId, String body) {
 		
-		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), relTypeCode, relId, id);
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id, relTypeCode, relId);
 		
 		if (reply == null) {
-			return rq.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", relId));
+			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
 		}
 		
-		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), reply);
+		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMember(), reply);
 		
 		if (actorCanModifyRd.isFail()) {
 			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 		
-		replyService.modifyReply(actorId, relTypeCode, relId, body, id);
+		replyService.modifyReply(member, relTypeCode, relId, body, id);
 		
-		return rq.jsReplace(Ut.f("%d번 게시물을 수정했습니다.", relId), Ut.f("../article/detail?id=%d", relId));
+		return rq.jsReplace(Ut.f("%d번 댓글을 수정했습니다.", id), Ut.f("../article/detail?id=%d", relId));
 	}
 	
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
-	public String doDelete(String relTypeCode, int relId, int id) {
+	public String doDelete(int id, String relTypeCode, int relId) {
 		
-		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), relTypeCode, relId, id);
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id, relTypeCode, relId);
 		
 		if (reply == null) {
-			return rq.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.", relId));
+			return rq.jsHistoryBack(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
 		}
 		
 		if (reply.getMemberId() != rq.getLoginedMemberId()) {
-			return rq.jsHistoryBack(Ut.f("%d번 게시물에 대한 권한이 없습니다.", relId));
+			return rq.jsHistoryBack(Ut.f("%d번 댓글에 대한 권한이 없습니다.", id));
 		}
 		
 		replyService.deleteReply(relTypeCode, relId, id);
 		
-		return rq.jsReplace(Ut.f("%d번 댓글을 삭제했습니다.", relId), "../article/list?boardId=1");
+		return rq.jsReplace(Ut.f("%d번 댓글을 삭제했습니다.", id), "../article/list?boardId=1");
 	}
 	
 }
