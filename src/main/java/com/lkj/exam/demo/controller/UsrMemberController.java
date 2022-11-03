@@ -104,12 +104,8 @@ public class UsrMemberController {
 		return Ut.jsReplace("로그아웃 되었습니다.", "/");
 	}
 	
-	@RequestMapping("/usr/member/myPage")
-	public String myPage(Model model) {
-		
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-		
-		model.addAttribute("member", member);
+	@RequestMapping("/usr/member/showMyPage")
+	public String showMyPage() {
 		
 		return "usr/member/myPage";
 	}

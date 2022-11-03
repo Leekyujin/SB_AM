@@ -63,7 +63,7 @@
 				</c:if>
 				<c:if test="${rq.isLogined() }">
 					<li class="hover:text-red-600">
-						<a class="h-full px-3 flex items-center" href="/usr/member/myPage">
+						<a class="h-full px-3 flex items-center" href="/usr/member/showMyPage">
 							<span>MYPAGE</span>
 						</a>
 					</li>
