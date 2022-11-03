@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lkj.exam.demo.service.MemberService;
 import com.lkj.exam.demo.util.Ut;
+import com.lkj.exam.demo.vo.Article;
 import com.lkj.exam.demo.vo.Member;
 import com.lkj.exam.demo.vo.ResultData;
 import com.lkj.exam.demo.vo.Rq;
@@ -22,8 +23,8 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public ResultData<Member> doJoin(String loginId, String loginPw, String name,
-			String nickname, String cellphoneNum, String email) {
+	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, 
+			String cellphoneNum, String email) {
 		
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
@@ -108,6 +109,54 @@ public class UsrMemberController {
 	public String showMyPage() {
 		
 		return "usr/member/myPage";
+	}
+	
+	@RequestMapping("usr/member/checkPassword")
+	public String showcheckPassword() {
+
+		return "usr/member/checkPassword";
+	}
+
+	@RequestMapping("usr/member/doCheckPassword")
+	@ResponseBody
+	public String doCheckPassword(String loginPw, String replcaUri) {
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("비밀번호를 입력해주세요");
+		}
+
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다");
+		}
+
+		return "usr/member/modify";
+	}
+	
+	@RequestMapping("/usr/member/modify")
+	public String modify() {
+		
+		return "usr/member/modify";
+	}
+	
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(String loginId, String loginPw, String name, String nickname, 
+			String cellphoneNum, String email) {
+		
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		
+		if (member == null) {
+			return rq.jsHistoryBack(Ut.f("회원 정보가 존재하지 않습니다."));
+		}
+		
+		ResultData actorCanModifyRd = memberService.actorCanModify(rq.getLoginedMemberId(), member);
+		
+		if (actorCanModifyRd.isFail()) {
+			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
+		}
+		
+		memberService.modifyMember(loginId, name, nickname, cellphoneNum, email);
+		
+		return rq.jsReplace(Ut.f("%s 회원님의 정보를 수정했습니다.", rq.getLoginedMember().getLoginId()), "../member/showMyPage");
 	}
 
 }

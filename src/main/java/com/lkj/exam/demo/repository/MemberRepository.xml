@@ -37,4 +37,14 @@
 		AND M.email = #{email}
 	</select>
 	
+	<update id="modifyMember">
+		UPDATE `member` AS M
+		SET updateDate = NOW(),
+		M.name = #{name },
+		M.nickname = #{nickname },
+		M.cellphoneNum = #{cellphoneNum },
+		M.email = #{email }
+		WHERE M.loginId = #{loginId }
+	</update>
+	
 </mapper>

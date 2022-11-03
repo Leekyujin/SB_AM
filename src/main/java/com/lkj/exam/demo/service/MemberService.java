@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.lkj.exam.demo.repository.MemberRepository;
 import com.lkj.exam.demo.util.Ut;
+import com.lkj.exam.demo.vo.Article;
 import com.lkj.exam.demo.vo.Member;
 import com.lkj.exam.demo.vo.ResultData;
 
@@ -50,6 +51,24 @@ public class MemberService {
 
 	public Member getMemberById(int id) {
 		return memberRepository.getMemberById(id);
+	}
+
+	public ResultData actorCanModify(int loginedMemberId, Member member) {
+		
+		if (member.getId() != loginedMemberId) {
+			return ResultData.from("F-2", "해당 게시물에 대한 권한이 없습니다.");
+		}
+		
+		return ResultData.from("S-1", "수정 가능");
+	}
+
+	public ResultData<Member> modifyMember(String loginId, String name, String nickname, String cellphoneNum, String email) {
+		
+		memberRepository.modifyMember(loginId, name, nickname, cellphoneNum, email);
+		
+		Member member = getMemberByLoginId(loginId);
+		
+		return ResultData.from("S-1", Ut.f("%s님의 회원 정보를 수정했습니다.", loginId), "member", member);
 	}
 
 }
