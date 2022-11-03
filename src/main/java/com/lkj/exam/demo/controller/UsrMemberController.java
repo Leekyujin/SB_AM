@@ -105,9 +105,9 @@ public class UsrMemberController {
 	}
 	
 	@RequestMapping("/usr/member/myPage")
-	public String myPage(Model model, String loginId, String loginPw) {
+	public String myPage(Model model) {
 		
-		Member member = memberService.getMemberByLoginId(loginId);
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
 		
 		model.addAttribute("member", member);
 		
