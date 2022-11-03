@@ -95,13 +95,10 @@ public class ReplyService {
 		return ResultData.from("S-1", Ut.f("%d번 댓글을 삭제했습니다.", id));
 	}
 
-	public ResultData<Reply> modifyReply(Member member, String body, int id) {
+	public ResultData modifyReply(int id, String body) {
+		replyRepository.modifyReply(id, body);
 		
-		replyRepository.modifyReply(body, id);
-		
-		Reply reply = getForPrintReply(member, id);
-		
-		return ResultData.from("S-1", Ut.f("%d번 댓글을 수정했습니다.", id), "reply", reply);
+		return ResultData.from("S-1", Ut.f("%d번 댓글을 수정했습니다", id));
 	}
 	
 }

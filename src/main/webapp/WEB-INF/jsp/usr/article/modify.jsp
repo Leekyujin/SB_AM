@@ -13,7 +13,7 @@
 		form.body.value = form.body.value.trim();
 		
 		if (form.body.value.length == 0) {
-			alert('댓글을 입력해주세요');
+			alert('내용을 입력해주세요');
 			form.body.focus();
 			return;
 		}

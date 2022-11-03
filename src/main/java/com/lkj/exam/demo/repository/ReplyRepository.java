@@ -67,14 +67,12 @@ public interface ReplyRepository {
 
 	@Update("""
 			<script>
-				UPDATE reply 
-				<set>
-					<if test="body != null and body != ''">`body` = #{body},</if> 
-					updateDate = NOW() 
-				</set>
-				WHERE id = #{id }
+				UPDATE reply
+				SET updateDate = NOW(),
+				`body` = #{body}
+				WHERE id = #{id}
 			</script>
 			""")
-	public void modifyReply(String body, int id);
+	public void modifyReply(int id, String body);
 
 }
