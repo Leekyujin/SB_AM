@@ -12,7 +12,7 @@
 		
 		form.loginPw.value = form.loginPw.value.trim();
 		
-		if (form.loginPwConfirm.value.length > 0) {
+		if (form.loginPwConfirm.value.length >= 0) {
 			
 			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 			

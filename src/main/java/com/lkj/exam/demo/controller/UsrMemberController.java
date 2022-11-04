@@ -122,7 +122,7 @@ public class UsrMemberController {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다");
 		}
 
-		return rq.jsReplace("확인되었습니다.", "/usr/member/modify");
+		return rq.jsReplace("", replaceUri);
 	}
 	
 	@RequestMapping("/usr/member/modify")

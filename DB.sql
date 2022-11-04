@@ -235,6 +235,29 @@ ALTER TABLE article ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAU
 # 게시물 테이블에 badReactionPoint 칼럼 추가
 ALTER TABLE article ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
+# 부가정보테이블
+CREATE TABLE attr (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `relTypeCode` CHAR(20) NOT NULL,
+    `relId` INT(10) UNSIGNED NOT NULL,
+    `typeCode` CHAR(30) NOT NULL,
+    `type2Code` CHAR(70) NOT NULL,
+    `value` TEXT NOT NULL
+);
+
+# attr 유니크 인덱스 걸기
+## 중복변수 생성금지
+## 변수찾는 속도 최적화
+ALTER TABLE `attr` ADD UNIQUE INDEX (`relTypeCode`, `relId`, `typeCode`, `type2Code`);
+
+## 특정 조건을 만족하는 회원 또는 게시물(기타 데이터)를 빠르게 찾기 위해서
+ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
+
+# attr에 만료날짜 추가
+ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
+
 # 기존 게시물의 goodReactionPoint, badReactionPoint 필드의 값 채워주기
 UPDATE article AS A
 INNER JOIN (
@@ -247,16 +270,10 @@ INNER JOIN (
 ON A.id = RP_SUM.relId
 SET A.goodReactionPoint = RP_SUM.goodReactionPoint,
 A.badReactionPoint = RP_SUM.badReactionPoint
- 
--- explain SELECT R.*, M.nickname AS extra__writerName
--- FROM reply AS R
--- LEFT JOIN `member` AS M
--- ON R.memberId = M.id
--- WHERE R.relTypeCode = 'article'
--- AND R.relId = 1
--- ORDER BY R.id DESC
 
 #####################################################################
+
+SELECT * FROM attr;
 
 SELECT * FROM reactionPoint;
 
@@ -272,6 +289,15 @@ SELECT * FROM board;
 
 SELECT LAST_INSERT_ID();
 
+/*
+explain SELECT R.*, M.nickname AS extra__writerName
+FROM reply AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+WHERE R.relTypeCode = 'article'
+AND R.relId = 1
+ORDER BY R.id DESC
+*/
 
 /*
 --> 각 게시물별 좋아요 합
