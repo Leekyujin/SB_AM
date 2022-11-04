@@ -13,8 +13,10 @@ import com.lkj.exam.demo.vo.ResultData;
 public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
+	private AttrService attrService;
 	
-	public MemberService(MemberRepository memberRepository) {
+	public MemberService(AttrService attrService, MemberRepository memberRepository) {
+		this.attrService = attrService;
 		this.memberRepository = memberRepository;
 	}
 
@@ -53,21 +55,21 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
-	public ResultData actorCanModify(int loginedMemberId, Member member) {
-		
-		if (member.getId() != loginedMemberId) {
-			return ResultData.from("F-2", "해당 게시물에 대한 권한이 없습니다.");
-		}
-		
-		return ResultData.from("S-1", "수정 가능");
-	}
-
 	public ResultData modify(int id, String loginPw, String name, String nickname, String cellphoneNum,
 			String email) {
 		
 		memberRepository.modify(id, loginPw, name, nickname, cellphoneNum, email);
 		
 		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
+	}
+
+	public String genMemberModifyAuthKey(int actorId) {
+		String memberModifyAuthKey = Ut.getTempPassword(10);
+		
+		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey,
+				Ut.getDateStrLater(60 * 5));
+		
+		return memberModifyAuthKey;
 	}
 
 }
