@@ -71,6 +71,10 @@
 					<td>${article.extra__writerName}</td>
 				</tr>
 				<tr>
+					<th>제목</th>
+					<td><input required="required" class="w-full input input-bordered input-info w-full max-w-xs" name="title" type="text" placeholder="${article.title }" ></td>
+				</tr>
+				<tr>
 					<th>내용</th>
 					<td><textarea class="w-full textarea textarea-info" name="body" placeholder="내용을 입력해주세요." >${article.body }</textarea></td>
 				</tr>

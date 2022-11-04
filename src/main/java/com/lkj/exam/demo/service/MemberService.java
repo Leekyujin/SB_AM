@@ -62,13 +62,12 @@ public class MemberService {
 		return ResultData.from("S-1", "수정 가능");
 	}
 
-	public ResultData<Member> modifyMember(String loginId, String name, String nickname, String cellphoneNum, String email) {
+	public ResultData modify(int id, String loginPw, String name, String nickname, String cellphoneNum,
+			String email) {
 		
-		memberRepository.modifyMember(loginId, name, nickname, cellphoneNum, email);
+		memberRepository.modify(id, loginPw, name, nickname, cellphoneNum, email);
 		
-		Member member = getMemberByLoginId(loginId);
-		
-		return ResultData.from("S-1", Ut.f("%s님의 회원 정보를 수정했습니다.", loginId), "member", member);
+		return ResultData.from("S-1", "회원정보가 수정되었습니다.");
 	}
 
 }

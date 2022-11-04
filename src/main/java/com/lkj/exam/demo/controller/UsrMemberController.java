@@ -58,16 +58,13 @@ public class UsrMemberController {
 	
 	@RequestMapping("usr/member/login")
 	public String showLogin() {
+		
 		return "usr/member/login";
 	}
 	
 	@RequestMapping("usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {
-		
-		if (rq.isLogined()) {
-			return Ut.jsHistoryBack("이미 로그인 되었습니다.");
-		}
 		
 		if (Ut.empty(loginId)) {
 			return Ut.jsHistoryBack("아이디를 입력해주세요.");
@@ -96,10 +93,6 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doLogout() {
 
-		if (!rq.isLogined()) {
-			return Ut.jsHistoryBack("로그아웃 상태입니다.");
-		}
-
 		rq.logout();
 
 		return Ut.jsReplace("로그아웃 되었습니다.", "/");
@@ -119,7 +112,8 @@ public class UsrMemberController {
 
 	@RequestMapping("usr/member/doCheckPassword")
 	@ResponseBody
-	public String doCheckPassword(String loginPw, String replcaUri) {
+	public String doCheckPassword(String loginPw, String replaceUri) {
+		
 		if (Ut.empty(loginPw)) {
 			return rq.jsHistoryBack("비밀번호를 입력해주세요");
 		}
@@ -128,35 +122,42 @@ public class UsrMemberController {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다");
 		}
 
-		return "usr/member/modify";
+		return rq.jsReplace("확인되었습니다.", "/usr/member/modify");
 	}
 	
 	@RequestMapping("/usr/member/modify")
-	public String modify() {
+	public String showModify() {
 		
 		return "usr/member/modify";
 	}
 	
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String loginId, String loginPw, String name, String nickname, 
-			String cellphoneNum, String email) {
+	public String doModify(String loginPw, String name, String nickname, String cellphoneNum, String email) {
 		
-		Member member = memberService.getMemberById(rq.getLoginedMemberId());
-		
-		if (member == null) {
-			return rq.jsHistoryBack(Ut.f("회원 정보가 존재하지 않습니다."));
+		if (Ut.empty(loginPw)) {
+			loginPw = null;
+		}
+		if (Ut.empty(name)) {
+			return rq.jsHistoryBack("이름을 입력해주세요.");
+		}
+		if (Ut.empty(nickname)) {
+			return rq.jsHistoryBack("닉네임을 입력해주세요.");
+		}
+		if (Ut.empty(cellphoneNum)) {
+			return rq.jsHistoryBack("전화번호를 입력해주세요.");
+		}
+		if (Ut.empty(email)) {
+			return rq.jsHistoryBack("이메일을 입력해주세요.");
 		}
 		
-		ResultData actorCanModifyRd = memberService.actorCanModify(rq.getLoginedMemberId(), member);
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum, email);
 		
-		if (actorCanModifyRd.isFail()) {
-			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
+		if (modifyRd.isFail()) {
+			return rq.jsHistoryBack(modifyRd.getMsg());
 		}
 		
-		memberService.modifyMember(loginId, name, nickname, cellphoneNum, email);
-		
-		return rq.jsReplace(Ut.f("%s 회원님의 정보를 수정했습니다.", rq.getLoginedMember().getLoginId()), "../member/showMyPage");
+		return rq.jsReplace(modifyRd.getMsg(), "../member/showMyPage");
 	}
 
 }

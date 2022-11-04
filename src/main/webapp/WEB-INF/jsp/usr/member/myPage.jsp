@@ -13,12 +13,12 @@
 				</colgroup>
 				
 				<tr>
-					<th>가입날짜</th>
-					<td>${rq.loginedMember.regDate }</td>
-				</tr>
-				<tr>
 					<th>로그인 아이디</th>
 					<td>${rq.loginedMember.loginId }</td>
+				</tr>
+				<tr>
+					<th>가입날짜</th>
+					<td>${rq.loginedMember.regDate }</td>
 				</tr>
 				<tr>
 					<th>이름</th>

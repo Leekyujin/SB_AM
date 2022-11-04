@@ -19,12 +19,16 @@
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input required="required" class="w-96 input input-bordered input-info w-full max-w-xs" 
-							name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." /></td>
+						<td>
+							<input required="required" class="w-96 input input-bordered input-info w-full max-w-xs" 
+							name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." />
+						</td>
 					</tr>
 					<tr>
 						<th></th>
-						<td><button class="btn btn btn-outline btn-success" type="submit" value="확인">확인</button></td>
+						<td>
+							<button class="btn btn btn-outline btn-success" type="submit" value="확인">확인</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -32,7 +36,8 @@
 	</div>
 
 	<div class="container mx-auto px-3 btns mt-1">
-		<button class="btn-text-link btn btn-outline btn-success float-right" type="button" onclick="history.back();">뒤로가기</button>
+		<button class="btn-text-link btn btn-outline btn-success float-right" type="button" 
+			onclick="history.back();">뒤로가기</button>
 	</div>
 
 </section>
