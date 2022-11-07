@@ -75,7 +75,9 @@ public class AttrService {
 
 	public int setValue(String relTypeCode, int relId, String typeCode, String type2Code, String value,
 			String expireDate) {
+		
 		attrRepository.setValue(relTypeCode, relId, typeCode, type2Code, value, expireDate);
+		
 		Attr attr = get(relTypeCode, relId, typeCode, type2Code);
 
 		if (attr != null) {
