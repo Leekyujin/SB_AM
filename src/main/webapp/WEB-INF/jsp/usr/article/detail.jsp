@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="ARTICLE DETAIL"/>
 <%@ include file="../common/head.jspf" %>
+<%@ include file="../common/toastUiEditorLib.jspf" %>
 
 <script>
 	const params = {};
@@ -73,7 +74,11 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${article.getForPirntBody() }</td>
+					<td>
+						<div class="toast-ui-viewer">
+      						<script type="text/x-template">${article.body}</script>
+    					</div>
+					</td>
 				</tr>
 				<tr>
 					<th>추천</th>
@@ -90,11 +95,7 @@
 							<span>&nbsp;</span>
 							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 						</c:if>
-<%-- 						<c:if test="${!actorCanMakeReaction }"> --%>
-<%-- 							<span class="badge badge-accent">👍 ${article.goodReactionPoint }</span> --%>
-<!-- 							<span>&nbsp;</span> -->
-<%-- 							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span> --%>
-<%-- 						</c:if> --%>
+						
 						<c:if test="${actorCanCancelGoodReaction }">
 							<span>&nbsp;</span>
 							<a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri} "
@@ -107,6 +108,7 @@
 							<span>&nbsp;</span>
 							<span class="badge badge-accent">👎 ${article.badReactionPoint }</span>
 						</c:if>
+						
 						<c:if test="${actorCanCancelBadReaction }">
 							<span>&nbsp;</span>
 							<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해주세요." href="#"
@@ -238,8 +240,10 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea class="w-full textarea textarea-info" name="body" 
-								placeholder="댓글을 입력해주세요." rows="5"></textarea></td>
+							<td>
+								<textarea class="w-full textarea textarea-info" name="body" 
+								placeholder="댓글을 입력해주세요." rows="5"></textarea>
+							</td>
 						</tr>
 						<tr>
 							<th></th>
