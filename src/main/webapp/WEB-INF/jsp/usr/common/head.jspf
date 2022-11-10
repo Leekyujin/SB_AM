@@ -47,11 +47,13 @@
 						<span>FREE</span>
 					</a>
 				</li>
-				<li class="hover:text-red-600">
-					<a class="h-full px-3 flex items-center" href="/usr/member/join">
-						<span>JOIN</span>
-					</a>
-				</li>
+				<c:if test="${!rq.logined }">
+					<li class="hover:text-red-600">
+						<a class="h-full px-3 flex items-center" href="/usr/member/join">
+							<span>JOIN</span>
+						</a>
+					</li>
+				</c:if>
 				<c:if test="${rq.logined }">
 					<li class="hover:text-red-600">
 						<a class="h-full px-3 flex items-center" href="/usr/article/write">
@@ -75,7 +77,7 @@
 				</c:if>
 				<c:if test="${rq.logined }">
 					<li class="hover:text-red-600">
-						<a class="h-full px-3 flex items-center" href="/usr/member/doLogout">
+						<a class="h-full px-3 flex items-center" href="${rq.logoutUri }">
 							<span>LOGOUT</span>
 						</a>
 					</li>

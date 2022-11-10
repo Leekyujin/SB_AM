@@ -26,6 +26,34 @@
 			alert('비밀번호를 입력해주세요.');
 		  	return;
 		}
+  		
+  		form.name.value = form.name.value.trim();
+    	  
+  		if(form.name.value == 0) {
+			alert('이름을 입력해주세요.');
+		  	return;
+		}
+  		
+  		form.nickname.value = form.nickname.value.trim();
+    	  
+  		if(form.nickname.value == 0) {
+			alert('닉네임을 입력해주세요.');
+		  	return;
+		}
+  		
+  		form.cellphoneNum.value = form.cellphoneNum.value.trim();
+    	  
+  		if(form.cellphoneNum.value == 0) {
+			alert('전화번호를 입력해주세요.');
+		  	return;
+		}
+  		
+  		form.email.value = form.email.value.trim();
+    	  
+  		if(form.email.value == 0) {
+			alert('이메일을 입력해주세요.');
+		  	return;
+		}
 		
 	  	form.submit();
 	  

@@ -125,16 +125,34 @@ public class Rq {
 	public String getLoginUri() {
 		return "../member/login?afterLoginUri=" + getAfterLoginUri();
 	}
+	
+	public String getLogoutUri() {
+		String requestUri = req.getRequestURI();
+		
+		switch(requestUri) {
+		case "/usr/article/write":
+		case "/usr/article/modify":
+			return "../member/doLogout?afterLogoutUri=" + "/";
+		}
+		
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
+	}
+	
+	public String getAfterLogoutUri() {
+		
+		return getEncodedCurrentUri();
+	}
 
 	public String getAfterLoginUri() {
 		String requestUri = req.getRequestURI();
 		
+		// 로그인 후 다시 돌아가면 안되는 URL
 		switch(requestUri) {
 		case "/usr/member/login":
 		case "/usr/member/join":
 		case "/usr/member/findLoginId":
 		case "/usr/member/findLoginPw":
-			return Ut.getUriEncoded(paramMap.get("afterLoginUri"));
+			return Ut.getUriEncoded(Ut.getAttr(paramMap, "afterLoginUri", ""));
 		}
 		
 		return getEncodedCurrentUri();
