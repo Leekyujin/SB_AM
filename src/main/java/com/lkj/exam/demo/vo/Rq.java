@@ -132,6 +132,7 @@ public class Rq {
 		switch(requestUri) {
 		case "/usr/article/write":
 		case "/usr/article/modify":
+		case "/usr/reply/modify":
 			return "../member/doLogout?afterLogoutUri=" + "/";
 		}
 		
