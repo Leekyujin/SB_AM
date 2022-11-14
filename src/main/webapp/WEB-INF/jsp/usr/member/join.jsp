@@ -4,6 +4,9 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/toastUiEditorLib.jspf"%>
 
+<!-- lodash debounce -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" referrerpolicy="no-referrer"></script>
+
 <script>
 	let submitJoinFormDone = false;
 	
@@ -113,6 +116,8 @@
 		}, 'json');
 	}
 	
+	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 300);
+	
 </script>
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
@@ -128,7 +133,7 @@
 						<th>아이디</th>
 						<td>
 							<input class="w-full input input-bordered input-info w-full max-w-xs" type="text" name="loginId"
-								 placeholder="아이디를 입력해주세요." autocomplete="off" onkeyup="checkLoginIdDup(this);"/>
+								 placeholder="아이디를 입력해주세요." autocomplete="off" onkeyup="checkLoginIdDupDebounced(this);"/>
 							<div class="loginId-msg"></div>
 						</td>
 					</tr>
