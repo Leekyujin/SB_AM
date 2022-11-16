@@ -77,6 +77,13 @@
 				</c:if>
 				<c:if test="${rq.logined }">
 					<li class="hover:text-red-600">
+						<a class="h-full px-3 flex items-center" href="/usr/member/showAdminPage">
+							<span>ADMIN</span>
+						</a>
+					</li>
+				</c:if>
+				<c:if test="${rq.logined }">
+					<li class="hover:text-red-600">
 						<a class="h-full px-3 flex items-center" href="${rq.logoutUri }">
 							<span>LOGOUT</span>
 						</a>

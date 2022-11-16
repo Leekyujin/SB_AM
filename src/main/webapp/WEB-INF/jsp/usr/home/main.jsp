@@ -17,7 +17,11 @@
 	<div class="layer">
 		<h2>POPUP</h2>
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt beatae facilis quis maxime quasi vero magni atque laborum pariatur repellat natus quidem nihil officia accusantium iure similique qui fuga at.
-		<button class="close-btn">닫기</button>
+		<div class="toggle-btn">
+			<div></div>
+			<div></div>
+		</div>
+		<button class="close-btn">close</button>
 	</div>
 </div>
 
