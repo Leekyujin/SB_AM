@@ -113,6 +113,11 @@
 			} else {
 				validLoginId = '';
 			}
+			
+			if (data.resultCode == 'F-B') {
+				alert(data.msg);
+				location.replace('/');
+			}
 		}, 'json');
 	}
 	
