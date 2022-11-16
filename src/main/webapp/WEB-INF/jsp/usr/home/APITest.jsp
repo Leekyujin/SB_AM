@@ -19,4 +19,4 @@
 
 
 
-<%@ include file="../common/foot.jspf"%>t.jspf" %>
+<%@ include file="../common/foot.jspf"%>

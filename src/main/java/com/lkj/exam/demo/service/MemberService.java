@@ -1,9 +1,12 @@
 package com.lkj.exam.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.lkj.exam.demo.repository.MemberRepository;
 import com.lkj.exam.demo.util.Ut;
+import com.lkj.exam.demo.vo.Article;
 import com.lkj.exam.demo.vo.Member;
 import com.lkj.exam.demo.vo.ResultData;
 
@@ -78,6 +81,18 @@ public class MemberService {
 		}
 		
 		return ResultData.from("S-1", "정상 코드입니다.");
+	}
+
+	public List<Member> getForPrintMembers() {
+		
+		List<Member> members =  memberRepository.getForPrintMembers();
+		
+		return members;
+	}
+
+	public int getMembersCount() {
+		
+		return memberRepository.getMembersCount();
 	}
 
 }

@@ -60,4 +60,14 @@
 		WHERE id = #{id }
 	</update>
 	
+	<select id="getForPrintMembers" resultType="Member">
+		SELECT * 
+		FROM `member` AS M 
+	</select>
+	
+	<select id="getMembersCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM `member` AS M 
+	</select>
+	
 </mapper>

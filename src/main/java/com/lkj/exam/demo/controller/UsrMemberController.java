@@ -1,5 +1,7 @@
 package com.lkj.exam.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,6 +122,19 @@ public class UsrMemberController {
 		rq.logout();
 
 		return Ut.jsReplace("로그아웃 되었습니다.", afterLogoutUri);
+	}
+	
+	@RequestMapping("/usr/member/showAdminPage")
+	public String showAdminPage(Model model) {
+		
+		int membersCount = memberService.getMembersCount();
+		
+		List<Member> members = memberService.getForPrintMembers();
+		
+		model.addAttribute("membersCount", membersCount);
+		model.addAttribute("members", members);
+		
+		return "usr/member/adminPage";
 	}
 	
 	@RequestMapping("/usr/member/showMyPage")

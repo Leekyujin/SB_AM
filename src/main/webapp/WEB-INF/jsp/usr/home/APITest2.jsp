@@ -5,15 +5,21 @@
 <%@ include file="../common/head.jspf"%>
 
 <div id="map" style="width: 500px; height: 500px;"></div>
+<div class="msg-1"></div>
+<div class="msg-2"></div>
+<div style="background-color:black; width: 100px; height:100px;" onclick="removeText();"></div>
+
 <p>
 	<button onclick="setCenter()">지도 중심좌표 이동시키기</button>
 	<button onclick="panTo()">지도 중심좌표 부드럽게 이동시키기</button>
 </p>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7f84ee073d8105d0cbf42fa5c20343d5"></script>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=52446482e44ffd512cd0bc1898a150ca"></script>
 <script>
-	const API_KEY = 'yIGj7lJBJIcshuAYg2rAxIOkX81W14YthO8jdaPqMNOxbp52KQZaUPkf83%2Bs27TMVMLnNvSzzRoUmbAuju%2F30A%3D%3D';
+	const API_KEY = 'mwvZgqwLYX1ODpztzQjkrx3NK7U4gczp2uVbSwsEhGg6mOUIkuIbwfrY2ywbLBnql%2BFve1N6QDgeRV1tF4xLWA%3D%3D';
 	var Lalocation;
 	var Lolocation;
+	
 	async function getData() {
 		const url = 'http://apis.data.go.kr/1180000/DaejeonNationalCemetery/Burialinfo042?name=홍길동&pageNo=1&numOfRows=50&serviceKey='
 				+ API_KEY;
@@ -24,8 +30,10 @@
 		Lolocation = data.body[0].longitude;
 		console.log(Lalocation);
 		console.log(Lolocation);
+		$('.msg-1').html('<div class="mt-1"> API 위도 : ' + data.body[0].latitude + '</div>');
 	}
 	getData();
+	
 	var lat = 36.3701311788239;
 	var lot = 127.298272866466;
 	var container = document.getElementById('map');
@@ -42,9 +50,10 @@
 	}
 	function panTo() {
 		// 이동할 위도 경도 위치를 생성합니다 
-		console.log("위도" + Lalocation);
-		console.log("경도" + Lolocation);
+		console.log("위도" + lat);
+		console.log("경도" + lot);
 		var moveLatLon = new kakao.maps.LatLng(lat, lot);
+		$('.msg-2').html('<div class="mt-1"> TEST 위도 : ' + lat + '</div>');
 		// 지도 중심을 부드럽게 이동시킵니다
 		// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 		map.panTo(moveLatLon);
@@ -56,6 +65,10 @@
 		position : markerPosition
 	});
 	marker.setMap(map);
+	
+	function removeText() {
+		$('.msg-2').html('<div class="mt-1"> TEST 위도 : </div>');
+	}
 </script>
 
 <%@ include file="../common/foot.jspf"%>
