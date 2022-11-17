@@ -38,7 +38,7 @@
 				<tbody>
 					<c:forEach var="member" items="${members }">
 					<tr>
-						<td><input type="checkbox" checked="checked" class="checkbox checkbox-accent" /></td>
+						<td><input type="checkbox" class="checkbox checkbox-accent" /></td>
 						<td>${member.id }</td>
 						<td>${member.loginId}</td>
 						<td>${member.name }</td>
