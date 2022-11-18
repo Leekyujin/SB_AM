@@ -46,7 +46,7 @@ public class MemberService {
 		return ResultData.from("S-1", "회원가입이 완료되었습니다.", "id", id);
 	}
 
-	private Member getMemberByNameAndEmail(String name, String email) {
+	public Member getMemberByNameAndEmail(String name, String email) {
 		return memberRepository.getMemberByNameAndEmail(name, email);
 	}
 
@@ -60,6 +60,8 @@ public class MemberService {
 
 	public ResultData modify(int id, String loginPw, String name, String nickname, String cellphoneNum,
 			String email) {
+		
+		loginPw = Ut.sha256(loginPw);
 		
 		memberRepository.modify(id, loginPw, name, nickname, cellphoneNum, email);
 		
@@ -95,6 +97,11 @@ public class MemberService {
 	public int getMembersCount() {
 		
 		return memberRepository.getMembersCount();
+	}
+
+	public void deleteMember(int id) {
+		
+		memberRepository.deleteMember(id);
 	}
 
 }

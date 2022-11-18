@@ -25,4 +25,6 @@ public interface MemberRepository {
 
 	public int getMembersCount();
 
+	public void deleteMember(int id);
+
 }

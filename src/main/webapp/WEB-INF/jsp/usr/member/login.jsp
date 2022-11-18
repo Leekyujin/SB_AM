@@ -23,7 +23,14 @@
 					</tr>
 					<tr>
 						<th></th>
-						<td><button class="btn btn btn-outline btn-success" type="submit" value="로그인">로그인</button></td>
+						<td><button class="btn btn-outline btn-success" type="submit" value="로그인">로그인</button></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<a href="${rq.findLoginIdUri }" class="btn btn-outline btn-success" type="submit">아이디 찾기</a>
+							<a href="${rq.findLoginPwUri }" class="btn btn-outline btn-success" type="submit">비밀번호 찾기</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

@@ -5,11 +5,12 @@
 
 <section class="mt-8">
 	<div class="container mx-auto px-3">
+		<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }"/>
 		<div class="flex">
 			<div class="text-lg">회원수 : <span class="badge">${membersCount }명</span></div>
 		</div>
 		
-		<div class="table-box-type-1 mt-3">
+		<form class="table-box-type-1" method="POST"  action="../member/doDelete">
 			<table>
 				<colgroup>
 				<col width="60"/>
@@ -38,7 +39,7 @@
 				<tbody>
 					<c:forEach var="member" items="${members }">
 					<tr>
-						<td><input type="checkbox" class="checkbox checkbox-accent" /></td>
+						<td><input type="checkbox" name="delList" class="checkbox checkbox-accent" value="${member.id }"/></td>
 						<td>${member.id }</td>
 						<td>${member.loginId}</td>
 						<td>${member.name }</td>
@@ -50,12 +51,15 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
-		<div class="btns float-right">
-			<c:if test="${rq.isLogined() }">
-				<a class="btn-text-link btn btn-outline btn-success" href="#">회원 삭제</a>
-			</c:if>
-		</div>
+			<div class="btns float-right mt-1">
+				<button class="btn-text-link btn btn-outline btn-success" type="submit" value="회원탈퇴">회원 탈퇴</button>
+			</div>
+		</form>
+<!-- 		<div class="btns float-right"> -->
+<%-- 			<c:if test="${rq.isAdminLogined() }"> --%>
+<!-- 				<a class="btn-text-link btn btn-outline btn-success" href="../member/doDelete">회원 삭제</a> -->
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
 	</div>
 </section>
 

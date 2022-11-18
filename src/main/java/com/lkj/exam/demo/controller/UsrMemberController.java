@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lkj.exam.demo.service.MemberService;
 import com.lkj.exam.demo.util.Ut;
+import com.lkj.exam.demo.vo.Article;
 import com.lkj.exam.demo.vo.Member;
 import com.lkj.exam.demo.vo.ResultData;
 import com.lkj.exam.demo.vo.Rq;
@@ -50,25 +51,6 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email, @RequestParam(defaultValue = "/") String afterLoginUri) {
-		
-		if (Ut.empty(loginId)) {
-			return rq.jsHistoryBack("F-1", "아이디를 입력해주세요.");
-		}
-		if (Ut.empty(loginPw)) {
-			return rq.jsHistoryBack("F-2", "비밀번호를 입력해주세요.");
-		}
-		if (Ut.empty(name)) {
-			return rq.jsHistoryBack("F-3", "이름을 입력해주세요.");
-		}
-		if (Ut.empty(nickname)) {
-			return rq.jsHistoryBack("F-4", "닉네임을 입력해주세요.");
-		}
-		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHistoryBack("F-5", "전화번호를 입력해주세요.");
-		}
-		if (Ut.empty(email)) {
-			return rq.jsHistoryBack("F-6", "이메일을 입력해주세요.");
-		}
 		
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 		
@@ -114,6 +96,25 @@ public class UsrMemberController {
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), afterLoginUri);
 	}
 	
+	@RequestMapping("usr/member/findLoginId")
+	public String showFindLoginId() {
+		return "usr/member/findLoginId";
+	}
+
+	@RequestMapping("usr/member/doFindLoginId")
+	@ResponseBody
+	public String doFindLoginId(String name, String email,
+			@RequestParam(defaultValue = "/") String afterFindLoginIdUri) {
+
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+
+		if (member == null) {
+			return Ut.jsHistoryBack("존재하지 않는 이름 또는 이메일입니다");
+		}
+
+		return Ut.jsReplace(Ut.f("회원님의 아이디는 [ %s ] 입니다", member.getLoginId()), afterFindLoginIdUri);
+	}
+	
 	@RequestMapping("usr/member/doLogout")
 	@ResponseBody
 	public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
@@ -128,12 +129,29 @@ public class UsrMemberController {
 		
 		int membersCount = memberService.getMembersCount();
 		
+		Member member = memberService.getMemberById(rq.getLoginedMemberId());
+		
+		if (member.getId() != 1) {
+			return rq.jsHistoryBackOnView("게시판에 대한 권한이 없습니다.");
+		}
+		
 		List<Member> members = memberService.getForPrintMembers();
 		
 		model.addAttribute("membersCount", membersCount);
 		model.addAttribute("members", members);
 		
 		return "usr/member/adminPage";
+	}
+	
+	@RequestMapping("/usr/member/doDelete")
+	@ResponseBody
+	public String doDelete(@RequestParam("delList") List<Integer> ids, @RequestParam(defaultValue = "/") String afterLoginUri) {
+		
+		for (Integer id : ids) {
+			memberService.deleteMember(id);
+		}
+		
+		return rq.jsReplace(Ut.f("회원 탈퇴가 처리되었습니다."), afterLoginUri);
 	}
 	
 	@RequestMapping("/usr/member/showMyPage")
@@ -156,7 +174,7 @@ public class UsrMemberController {
 			return rq.jsHistoryBack("비밀번호를 입력해주세요");
 		}
 
-		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다");
 		}
 		
@@ -203,18 +221,7 @@ public class UsrMemberController {
 		
 		if (Ut.empty(loginPw)) {
 			loginPw = null;
-		}
-		if (Ut.empty(name)) {
-			return rq.jsHistoryBack("이름을 입력해주세요.");
-		}
-		if (Ut.empty(nickname)) {
-			return rq.jsHistoryBack("닉네임을 입력해주세요.");
-		}
-		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHistoryBack("전화번호를 입력해주세요.");
-		}
-		if (Ut.empty(email)) {
-			return rq.jsHistoryBack("이메일을 입력해주세요.");
+			return rq.jsHistoryBack("비밀번호를 입력해주세요");
 		}
 		
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum, email);

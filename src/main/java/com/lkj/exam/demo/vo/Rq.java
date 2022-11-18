@@ -106,6 +106,13 @@ public class Rq {
 	public boolean isNotLogined() {
 		return !isLogined;
 	}
+	
+	public boolean isAdminLogined() {
+		if (loginedMemberId == 1) {
+			return true;
+		}
+		return false;
+	}
 
 	public String jsHistoryBackOnView(String msg) {
 		req.setAttribute("msg", msg);
@@ -160,6 +167,22 @@ public class Rq {
 	
 	public String getJoinUri() {
 		return "../member/join?afterLoginUri=" + getAfterLoginUri();
+	}
+	
+	public String getFindLoginIdUri() {
+		return "../member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
+	}
+
+	public String getFindLoginPwUri() {
+		return "../member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
+	}
+
+	public String getAfterFindLoginIdUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public String getAfterFindLoginPwUri() {
+		return getEncodedCurrentUri();
 	}
 	
 	public String getLogoutUri() {

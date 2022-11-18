@@ -75,7 +75,7 @@
 						</a>
 					</li>
 				</c:if>
-				<c:if test="${rq.logined }">
+				<c:if test="${rq.isAdminLogined() }">
 					<li class="hover:text-red-600">
 						<a class="h-full px-3 flex items-center" href="/usr/member/showAdminPage">
 							<span>ADMIN</span>
