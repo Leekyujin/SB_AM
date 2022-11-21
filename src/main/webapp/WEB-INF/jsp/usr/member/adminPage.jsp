@@ -5,7 +5,7 @@
 
 <section class="mt-8">
 	<div class="container mx-auto px-3">
-		<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }"/>
+		<input type="hidden" name="afterDeleteUri" value="${param.afterDeletenUri }"/>
 		<div class="flex">
 			<div class="text-lg">회원수 : <span class="badge">${membersCount }명</span></div>
 		</div>

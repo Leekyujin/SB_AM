@@ -3,6 +3,7 @@ package com.lkj.exam.demo.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lkj.exam.demo.vo.Member;
 

@@ -103,16 +103,40 @@ public class UsrMemberController {
 
 	@RequestMapping("usr/member/doFindLoginId")
 	@ResponseBody
-	public String doFindLoginId(String name, String email,
-			@RequestParam(defaultValue = "/") String afterFindLoginIdUri) {
+	public String doFindLoginId(String name, String email, @RequestParam(defaultValue = "/") String afterFindLoginIdUri) {
 
 		Member member = memberService.getMemberByNameAndEmail(name, email);
 
 		if (member == null) {
-			return Ut.jsHistoryBack("존재하지 않는 이름 또는 이메일입니다");
+			return Ut.jsHistoryBack("이름과 이메일을 확인해주세요.");
 		}
 
-		return Ut.jsReplace(Ut.f("회원님의 아이디는 [ %s ] 입니다", member.getLoginId()), afterFindLoginIdUri);
+		return Ut.jsReplace(Ut.f("회원님의 아이디는 [ %s ] 입니다.", member.getLoginId()), afterFindLoginIdUri);
+	}
+	
+	@RequestMapping("usr/member/findLoginPw")
+	public String showFindLoginPw() {
+		return "usr/member/findLoginPw";
+	}
+
+	@RequestMapping("usr/member/doFindLoginPw")
+	@ResponseBody
+	public String doFindLoginPw(String loginId, String email,
+			@RequestParam(defaultValue = "/") String afterFindLoginPwUri) {
+
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		if (member == null) {
+			return Ut.jsHistoryBack("일치하는 회원이 없습니다.");
+		}
+
+		if (member.getEmail().equals(email) == false) {
+			return Ut.jsHistoryBack("이메일이 일치하지 않습니다.");
+		}
+
+		ResultData notifyTempLoginPwByEmailRd = memberService.notifyTempLoginPwByEmailRd(member);
+
+		return Ut.jsReplace(notifyTempLoginPwByEmailRd.getMsg(), afterFindLoginPwUri);
 	}
 	
 	@RequestMapping("usr/member/doLogout")
@@ -145,13 +169,11 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doDelete")
 	@ResponseBody
-	public String doDelete(@RequestParam("delList") List<Integer> ids, @RequestParam(defaultValue = "/") String afterLoginUri) {
+	public String doDelete(@RequestParam("delList") List<Integer> ids, @RequestParam(defaultValue = "/") String afterDeleteUri) {
 		
-		for (Integer id : ids) {
-			memberService.deleteMember(id);
-		}
+		memberService.deleteMember(ids);
 		
-		return rq.jsReplace(Ut.f("회원 탈퇴가 처리되었습니다."), afterLoginUri);
+		return rq.jsReplace(Ut.f("회원 탈퇴가 처리되었습니다."), afterDeleteUri);
 	}
 	
 	@RequestMapping("/usr/member/showMyPage")

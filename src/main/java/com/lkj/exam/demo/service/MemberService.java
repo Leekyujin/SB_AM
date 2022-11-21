@@ -2,23 +2,30 @@ package com.lkj.exam.demo.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lkj.exam.demo.repository.MemberRepository;
 import com.lkj.exam.demo.util.Ut;
-import com.lkj.exam.demo.vo.Article;
 import com.lkj.exam.demo.vo.Member;
 import com.lkj.exam.demo.vo.ResultData;
 
 @Service
 public class MemberService {
+	@Value("${custom.siteMainUri}")
+	private String siteMainUri;
+	@Value("${custom.siteName}")
+	private String siteName;
 	
 	private MemberRepository memberRepository;
 	private AttrService attrService;
+	private MailService mailService;
 	
-	public MemberService(AttrService attrService, MemberRepository memberRepository) {
+	public MemberService(AttrService attrService, MailService mailService, MemberRepository memberRepository) {
 		this.attrService = attrService;
 		this.memberRepository = memberRepository;
+		this.mailService = mailService;
 	}
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname,
@@ -86,6 +93,27 @@ public class MemberService {
 		
 		return ResultData.from("S-1", "정상 코드입니다.");
 	}
+	
+	public ResultData notifyTempLoginPwByEmailRd(Member actor) {
+		String title = "[" + siteName + "] 임시 패스워드 발송";
+		String tempPassword = Ut.getTempPassword(6);
+		String body = "<h1>임시 패스워드 : " + tempPassword + "</h1>";
+		body += "<a href=\"" + siteMainUri + "/usr/member/login\" target=\"_blank\">로그인 하러가기</a>";
+
+		ResultData sendResultData = mailService.send(actor.getEmail(), title, body);
+
+		if (sendResultData.isFail()) {
+			return sendResultData;
+		}
+
+		setTempPassword(actor, tempPassword);
+
+		return ResultData.from("S-1", "계정의 이메일주소로 임시 패스워드가 발송되었습니다.");
+	}
+
+	private void setTempPassword(Member actor, String tempPassword) {
+		memberRepository.modify(actor.getId(), Ut.sha256(tempPassword), null, null, null, null);
+	}
 
 	public List<Member> getForPrintMembers() {
 		
@@ -99,9 +127,11 @@ public class MemberService {
 		return memberRepository.getMembersCount();
 	}
 
-	public void deleteMember(int id) {
+	public void deleteMember(@RequestParam("delList") List<Integer> ids) {
 		
+		for(Integer id : ids) {
 		memberRepository.deleteMember(id);
+		}
 	}
 
 }

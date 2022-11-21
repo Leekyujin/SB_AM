@@ -128,16 +128,16 @@
 		
 		<div class="btns text-right mt-1">
 			<c:if test="${empty param.listUri }">
-				<button type="button" class="btn-text-link btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
+				<button type="button" class="btn btn-outline btn-success" onclick="history.back();">뒤로가기</button>
 			</c:if>
 			<c:if test="${not empty param.listUri }">
-				<a class="btn-text-link btn btn-outline btn-success" href="${param.listUri }">뒤로가기</a>
+				<a class="btn btn-outline btn-success" href="${param.listUri }">뒤로가기</a>
 			</c:if>
 			<c:if test="${article.extra__actorCanModify }">
-				<a class="btn-text-link btn btn-outline btn-success" href="../article/modify?id=${article.id }">수정</a>
+				<a class="btn btn-outline btn-success" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
 			<c:if test="${article.extra__actorCanDelete }">
-				<a class="btn-text-link btn btn-outline btn-success" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" 
+				<a class="btn btn-outline btn-success" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;" 
 					href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
 		</div>
@@ -208,10 +208,10 @@
 							<td>${reply.goodReactionPoint }</td>
 							<td>
 								<c:if test="${reply.extra__actorCanModify }">
-									<a class="btn-text-link btn btn-outline btn-success" href="../reply/modify?id=${reply.id }&replaceUri=${rq.encodedCurrentUri }">수정</a>
+									<a class="btn btn-outline btn-success" href="../reply/modify?id=${reply.id }&replaceUri=${rq.encodedCurrentUri }">수정</a>
 								</c:if>
 								<c:if test="${reply.extra__actorCanDelete }">
-									<a class="btn-text-link btn btn-outline btn-success" 
+									<a class="btn btn-outline btn-success" 
 										onclick="if(confirm('삭제하시겠습니까?') == false) return false;" 
 										href="../reply/doDelete?id=${reply.id }&replaceUri=${rq.encodedCurrentUri }">삭제</a>
 								</c:if>
@@ -254,7 +254,7 @@
 						<tr>
 							<th></th>
 							<td>
-								<button class="btn-text-link btn btn-outline btn-success" type="submit">댓글 작성</button>
+								<button class="btn btn-outline btn-success" type="submit">댓글 작성</button>
 							</td>
 						</tr>
 					</tbody>
@@ -262,7 +262,7 @@
 			</form>
 		</c:if>
 		<c:if test="${rq.notLogined }">
-			<a class="btn-text-link btn btn-outline btn-success" href="${rq.loginUri }">로그인</a> 후 이용해주세요.
+			<a class="btn btn-outline btn-success" href="${rq.loginUri }">로그인</a> 후 이용해주세요.
 		</c:if>
 	</div>
 </section>

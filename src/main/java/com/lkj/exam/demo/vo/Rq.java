@@ -176,12 +176,20 @@ public class Rq {
 	public String getFindLoginPwUri() {
 		return "../member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
 	}
+	
+	public String getDeleteUri() {
+		return "../member/doDelete?afterDeleteUri=" + getAfterDeleteUri();
+	}
 
 	public String getAfterFindLoginIdUri() {
 		return getEncodedCurrentUri();
 	}
 
 	public String getAfterFindLoginPwUri() {
+		return getEncodedCurrentUri();
+	}
+	
+	public String getAfterDeleteUri() {
 		return getEncodedCurrentUri();
 	}
 	
