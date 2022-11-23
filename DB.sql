@@ -57,7 +57,7 @@ loginPw = 'admin',
 `name` = '관리자', 
 nickname = '관리자',
 cellphoneNum = '01012341234',
-email = 'kyujinlee82@gmail.com';
+email = 'leekyujin821018@gmail.com';
 
 # 회원 테스트데이터 생성 (일반)
 INSERT INTO `member` 
@@ -68,7 +68,7 @@ loginPw = 'test1',
 `name` = '사용자1', 
 nickname = '사용자1',
 cellphoneNum = '01043214321',
-email = 'kyujinlee82@gmail.com';
+email = 'leekyujin821018@gmail.com';
 
 INSERT INTO `member` 
 SET regDate = NOW(),
@@ -78,7 +78,7 @@ loginPw = 'test2',
 `name` = '사용자2', 
 nickname = '사용자2',
 cellphoneNum = '01067896789',
-email = 'kyujinlee82@gmail.com';
+email = 'leekyujin821018@gmail.com';
 
 # 게시물 테이블에 회원번호 칼럼 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
@@ -257,6 +257,11 @@ ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
 
 # attr에 만료날짜 추가
 ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
+
+ALTER TABLE `member` MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
+
+UPDATE `member`
+SET loginPw = SHA2(loginPw, 256);
 
 # 기존 게시물의 goodReactionPoint, badReactionPoint 필드의 값 채워주기
 UPDATE article AS A
